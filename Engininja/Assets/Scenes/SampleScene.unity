@@ -255,9 +255,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1879982114}
-  smoothTime: 0.2
+  smoothTime: 0.3
   yOffset: 2
-  aheadAmount: 0.2
+  aheadAmount: 0.25
 --- !u!1 &550365827
 GameObject:
   m_ObjectHideFlags: 0
@@ -5912,7 +5912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb846960e7e52b42a987f69c9be4a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 7
+  maxPlayerSpeed: 7
   timeToMaxVelocity: 0.1
   playerJumpHeight: 14
   jumpableGround:
