@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float playerJumpHeight = 14f;
     public LayerMask jumpableGround;
 
-    private BoxCollider2D collider;
+    private BoxCollider2D coll;
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sprite;
@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        collider = GetComponent<BoxCollider2D>();
+        coll = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -77,6 +77,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.BoxCast(collider.bounds.center, collider.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
+        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
 }
