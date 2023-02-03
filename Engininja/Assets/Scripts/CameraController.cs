@@ -6,9 +6,9 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Rigidbody2D target;
-    public float smoothTime = 0.1f;
-    public float yOffset = 2f;
-    public float aheadAmount = 0.2f;
+    public float smoothTime;
+    public float yOffset;
+    public float aheadAmount;
 
     private Vector3 velocity = Vector3.zero;
 
