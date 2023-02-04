@@ -8,7 +8,7 @@ public class PlayerDetection : MonoBehaviour
     public LayerMask playerMask;
     public LayerMask obstacleMask;
     public float lineOfSightDistance = 5f;
-    public int viewAngle = 20;
+    public int viewAngle = 50;
     public int castStep = 2;
 
 
@@ -21,18 +21,12 @@ public class PlayerDetection : MonoBehaviour
 
     void Update()
     {
-        Vector3 los = new Vector3(lineOfSightDistance, coll.bounds.size.y * 1.5f);
+        //Vector3 los = new Vector3(lineOfSightDistance, coll.bounds.size.y * 1.5f);
         // Prevent crashes
         if (viewAngle < 1 || castStep < 1) return;
         // Cast a cone of a given degree
-        for (int i = viewAngle / 2 * -1; i < viewAngle / 2; i += castStep)
+        for (int i = viewAngle / 2; i > viewAngle / 2 * -1; i -= castStep)
         {
-            Vector2 t = new Vector2(
-                coll.bounds.center.x + lineOfSightDistance * Mathf.Sin(ConvertToRad(i + 90)),
-                coll.bounds.center.y + lineOfSightDistance * Mathf.Cos(ConvertToRad(i + 90))
-                );
-            //t.Normalize();
-
             Vector2 angle = new Vector2(
                 lineOfSightDistance * Mathf.Sin(ConvertToRad(i + 90)),
                 lineOfSightDistance * Mathf.Cos(ConvertToRad(i + 90))
@@ -45,12 +39,11 @@ public class PlayerDetection : MonoBehaviour
             {
                 Debug.Log(raycastHit.collider.gameObject.name);
                 Debug.DrawRay(coll.bounds.center, angle, Color.red);
-
+                transform.rotation = Quaternion.Euler(0, 0, 90f - Vector2.Angle(Vector2.up, angle));
             }
             else
             {
                 Debug.DrawRay(coll.bounds.center, angle);
-
             }
         }
 

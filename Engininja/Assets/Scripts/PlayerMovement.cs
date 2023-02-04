@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private SpriteRenderer sprite;
     private InputHandler inputHandler;
-    private float currentXVelocity = 0f;
+    //private float currentXVelocity = 0f;
     private Vector2 inputVector = Vector2.zero;
     private bool climbing = false;
 
