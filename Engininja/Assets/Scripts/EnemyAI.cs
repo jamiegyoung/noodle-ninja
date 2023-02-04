@@ -5,19 +5,30 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    //private BoxCollider2D coll;
-    //public LayerMask playerMask;
-    //public float lineOfSightDistance = 20f;
+    //public Transform playerTransform;
+    private float lastFlipped;
+    private float rotationValue = 0;
 
 
-    //void Start()
-    //{
-    //    coll = GetComponent<BoxCollider2D>();
-    //}
+    void Start()
+    {
+        lastFlipped = Time.time;
+        //headTransform = transform.GetChild(0);
+    }
 
-    //void Update()
-    //{
-    //    Vector3 los = new Vector3(lineOfSightDistance, coll.bounds.size.y * 1.5f);
-    //    bool canSeePlayer = Physics2D.Raycast(coll.bounds)
-    //}
+    void Update()
+    {
+        //Debug.Log(headTransform.rotation.z);
+        //Debug.Log(Quaternion.Angle(Quaternion.Euler(0, 0, 0), headTransform.rotation));
+        //float headAngle = Quaternion.Angle(Quaternion.Euler(0, 0, 0), headTransform.rotation);
+    
+        if (lastFlipped - Time.time < -5f)
+        {
+            lastFlipped = Time.time;
+            rotationValue = (rotationValue + 180) % 360;
+            transform.rotation = Quaternion.Euler(0, rotationValue, 0);
+        }
+        //Quaternion(0, 0, 0, 1)
+        //Quaternion(0, 1, 0, 0)
+    }
 }

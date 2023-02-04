@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerDetection : MonoBehaviour
 {
     private BoxCollider2D coll;
+
     public LayerMask playerMask;
     public LayerMask obstacleMask;
     public float lineOfSightDistance = 5f;
     public int viewAngle = 50;
     public int castStep = 2;
+    public float rotationStep = .02f;
 
 
     void Start()
@@ -19,32 +21,56 @@ public class PlayerDetection : MonoBehaviour
 
     private float ConvertToRad(float num) => num * (Mathf.PI / 180);
 
+    private bool forCheck(int i, int viewAngleOffset)
+    {
+        if (viewAngleOffset < 0)
+        {
+            return i > viewAngle / 2 * viewAngleOffset;
+        }
+        else
+        {
+            return i < viewAngle / 2 * viewAngleOffset;
+        }
+    }
+
     void Update()
     {
-        //Vector3 los = new Vector3(lineOfSightDistance, coll.bounds.size.y * 1.5f);
+        Quaternion parentRotation = transform.parent.transform.rotation;
+        int viewAngleOffset = (parentRotation.y == 0) ? 1 : -1;
         // Prevent crashes
         if (viewAngle < 1 || castStep < 1) return;
+        bool found = false;
         // Cast a cone of a given degree
-        for (int i = viewAngle / 2; i > viewAngle / 2 * -1; i -= castStep)
+        for (int i = viewAngle / 2 * -viewAngleOffset; forCheck(i, viewAngleOffset); i += castStep * viewAngleOffset)
         {
+            // No need to raycast if the player has been found
+            if (found) break;
+            float offset = parentRotation.y * 180;
             Vector2 angle = new Vector2(
-                lineOfSightDistance * Mathf.Sin(ConvertToRad(i + 90)),
-                lineOfSightDistance * Mathf.Cos(ConvertToRad(i + 90))
+                lineOfSightDistance * Mathf.Sin(ConvertToRad(offset + i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation))),
+                lineOfSightDistance * Mathf.Cos(ConvertToRad(offset + i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation)))
                 );
-
-            //angle.Normalize();
 
             RaycastHit2D raycastHit = Physics2D.Raycast(coll.bounds.center, angle, lineOfSightDistance, playerMask + obstacleMask);
             if (raycastHit.collider && raycastHit.collider.gameObject.name == "Player")
             {
-                Debug.Log(raycastHit.collider.gameObject.name);
+                found = true;
                 Debug.DrawRay(coll.bounds.center, angle, Color.red);
-                transform.rotation = Quaternion.Euler(0, 0, 90f - Vector2.Angle(Vector2.up, angle));
+                Quaternion target = Quaternion.LookRotation(
+                    raycastHit.collider.gameObject.transform.position - transform.position, transform.TransformDirection(Vector3.up)
+                    );
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(0, 0, target.z, target.w), rotationStep);
+
             }
             else
             {
                 Debug.DrawRay(coll.bounds.center, angle);
             }
+        }
+        if (found == false)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), rotationStep);
         }
 
     }

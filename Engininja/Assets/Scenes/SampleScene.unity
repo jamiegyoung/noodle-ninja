@@ -1400,7 +1400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116839059}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.21, z: -0.1}
+  m_LocalPosition: {x: 0, y: 1.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1478,8 +1478,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   lineOfSightDistance: 12
-  viewAngle: 50
-  castStep: 3
+  viewAngle: 60
+  castStep: 6
+  rotationStep: 0.5
 --- !u!61 &1116839063
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5907,6 +5908,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1865210996}
   - component: {fileID: 1865210995}
+  - component: {fileID: 1865210997}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -5982,6 +5984,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1865210997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865210994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82a9e204aa4195641bd9b054635d6f0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1879982111
 GameObject:
   m_ObjectHideFlags: 0
