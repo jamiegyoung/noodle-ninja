@@ -7,7 +7,7 @@ public class PlayerDetection : MonoBehaviour
     private BoxCollider2D coll;
     public LayerMask playerMask;
     public LayerMask obstacleMask;
-    public float lineOfSightDistance = 20f;
+    public float lineOfSightDistance = 5f;
     public int viewAngle = 20;
     public int castStep = 2;
 
@@ -31,16 +31,25 @@ public class PlayerDetection : MonoBehaviour
                 coll.bounds.center.x + lineOfSightDistance * Mathf.Sin(ConvertToRad(i + 90)),
                 coll.bounds.center.y + lineOfSightDistance * Mathf.Cos(ConvertToRad(i + 90))
                 );
-            RaycastHit2D raycastHit = Physics2D.Raycast(coll.bounds.center, t, lineOfSightDistance, playerMask + obstacleMask);
+            //t.Normalize();
+
+            Vector2 angle = new Vector2(
+                lineOfSightDistance * Mathf.Sin(ConvertToRad(i + 90)),
+                lineOfSightDistance * Mathf.Cos(ConvertToRad(i + 90))
+                );
+
+            //angle.Normalize();
+
+            RaycastHit2D raycastHit = Physics2D.Raycast(coll.bounds.center, angle, lineOfSightDistance, playerMask + obstacleMask);
             if (raycastHit.collider && raycastHit.collider.gameObject.name == "Player")
             {
                 Debug.Log(raycastHit.collider.gameObject.name);
-                Debug.DrawRay(coll.bounds.center, t, Color.red);
+                Debug.DrawRay(coll.bounds.center, angle, Color.red);
 
             }
             else
             {
-                Debug.DrawRay(coll.bounds.center, t);
+                Debug.DrawRay(coll.bounds.center, angle);
 
             }
         }
