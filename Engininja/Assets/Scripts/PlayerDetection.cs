@@ -1,7 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEditor;
 using UnityEngine;
+
+// modified version of https://stackoverflow.com/a/643438
+// Removed wrapping and added previous
+public static class Extensions
+{
+    public static T Next<T>(this T src) where T : struct
+    {
+
+        T[] Arr = GetArrFromEnum(src);
+        int j = Array.IndexOf<T>(Arr, src) + 1;
+        return (Arr.Length == j) ? Arr[j - 1] : Arr[j];
+    }
+
+    public static T Previous<T>(this T src) where T : struct
+    {
+        T[] Arr = GetArrFromEnum(src);
+        int j = Array.IndexOf<T>(Arr, src) - 1;
+        return (j == -1) ? Arr[0] : Arr[j];
+    }
+
+    private static T[] GetArrFromEnum<T>(T src) where T : struct
+    {
+        if (!typeof(T).IsEnum) throw new ArgumentException(String.Format("Argument {0} is not an Enum", typeof(T).FullName));
+        return (T[])Enum.GetValues(src.GetType());
+    }
+}
 
 public class PlayerDetection : MonoBehaviour
 {
@@ -15,9 +40,20 @@ public class PlayerDetection : MonoBehaviour
     public float rotationStep = .02f;
     private bool hasVisionOfPlayer = false;
     private int alertCounter = 0;
+    private float lastAlertTime = 0;
+    public AlertState alertState;
 
-    private const int MAX_ALERT = 100;
+    private const int MAX_ALERT = 250;
     private const int MIN_ALERT = 0;
+
+    public enum AlertState
+    {
+        Idle,
+        Aware,
+        Attacking
+    }
+
+
 
     void Start()
     {
@@ -26,7 +62,7 @@ public class PlayerDetection : MonoBehaviour
 
     private float ConvertToRad(float num) => num * (Mathf.PI / 180);
 
-    private bool forCheck(int i, int viewAngleOffset)
+    private bool ForCheck(int i, int viewAngleOffset)
     {
         if (viewAngleOffset < 0)
         {
@@ -38,40 +74,74 @@ public class PlayerDetection : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void UpdateAlertCounter()
     {
-        updateAlert();
-    }
-
-    private void updateAlert()
-    {
-        if (hasVisionOfPlayer && alertCounter < MAX_ALERT)
+        // 50 buffer for alert going down
+        if (hasVisionOfPlayer && alertCounter < MAX_ALERT + 50)
         {
-            alertCounter++;
+            // goes up 3 times quicker than down
+            alertCounter += 3;
+            lastAlertTime = Time.time;
         }
         else if (!hasVisionOfPlayer && alertCounter > MIN_ALERT)
         {
             alertCounter--;
         }
+
+        // increment the state if hit max
+        if (alertCounter > MAX_ALERT && alertState != AlertState.Attacking)
+        {
+            // make sure we don't loop up and down
+            alertCounter = MIN_ALERT + 5;
+            alertState = alertState.Next();
+        }
+
+        // decrement if down
+        if (alertCounter <= MIN_ALERT)
+        {
+            Debug.Log(Time.time - lastAlertTime);
+            if (Time.time - lastAlertTime > 30f && alertState != AlertState.Idle)
+            {
+                alertCounter = MAX_ALERT;
+                alertState = alertState.Previous();
+            }
+        }
     }
 
-    private void OnDrawGizmos()
+    private void UpdateAlertState()
     {
-        GUIStyle style= new GUIStyle();
-        style.normal.textColor = Color.green;
-        style.fontSize = 18;
-        style.alignment = TextAnchor.MiddleCenter;
-        style.border = new RectOffset(10, 10, 10, 10);
-        Handles.Label(new Vector2(transform.position.x, transform.position.y + .5f), alertCounter.ToString(), style);
+        if (alertCounter < (int)AlertState.Aware)
+        {
+            alertState = AlertState.Idle;
+            return;
+        }
+        else if (alertCounter < (int)AlertState.Aware)
+        {
+            alertState = AlertState.Aware;
+        }
+        else if (alertCounter < (int)AlertState.Attacking)
+        {
+            alertState = AlertState.Aware;
+        }
+        else
+        {
+            alertState = AlertState.Attacking;
+        }
+        // Set the last aware time if was aware
+        lastAlertTime = Time.time;
+
     }
 
-    void Update()
+
+    private void UpdateAlert()
     {
-        handleLineOfSight();
-
+        UpdateAlertCounter();
+        //UpdateAlertState();
     }
 
-    private void handleLineOfSight()
+
+
+    private void HandleLineOfSight()
     {
         Quaternion parentRotation = transform.parent.transform.rotation;
         int viewAngleOffset = (parentRotation.y == 0) ? 1 : -1;
@@ -79,12 +149,12 @@ public class PlayerDetection : MonoBehaviour
         if (viewAngle < 1 || castStep < 1) return;
         hasVisionOfPlayer = false;
         // Cast a cone of a given degree
-        for (int i = viewAngle / 2 * -viewAngleOffset; forCheck(i, viewAngleOffset); i += castStep * viewAngleOffset)
+        for (int i = viewAngle / 2 * -viewAngleOffset; ForCheck(i, viewAngleOffset); i += castStep * viewAngleOffset)
         {
             // No need to raycast if the player has been found
             if (hasVisionOfPlayer) break;
             float offset = parentRotation.y * 180;
-            Vector2 angle = new Vector2(
+            Vector2 angle = new(
                 lineOfSightDistance * Mathf.Sin(ConvertToRad(offset + i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation))),
                 lineOfSightDistance * Mathf.Cos(ConvertToRad(offset + i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation)))
                 );
@@ -111,5 +181,27 @@ public class PlayerDetection : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), rotationStep);
 
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        GUIStyle style = new();
+        style.normal.textColor = Color.green;
+        style.fontSize = 18;
+        style.alignment = TextAnchor.MiddleCenter;
+        style.border = new RectOffset(10, 10, 10, 10);
+        Handles.Label(new Vector2(transform.position.x, transform.position.y + .5f), alertCounter.ToString() + " : " + alertState.ToString(), style);
+    }
+
+    void FixedUpdate()
+    {
+        if (GetComponentInParent<EnemyAI>().IsDead == true) { return; }
+        UpdateAlert();
+    }
+
+    void Update()
+    {
+        if (GetComponentInParent<EnemyAI>().IsDead == true) { return; }
+        HandleLineOfSight();
     }
 }

@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private SpriteRenderer sprite;
     private InputHandler inputHandler;
-    //private float currentXVelocity = 0f;
+    private float currentXVelocity = 0f;
     private Vector2 inputVector = Vector2.zero;
     private bool climbing = false;
 
@@ -43,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
     }
 
-    private float playerSpeed
+    private float PlayerSpeed
     {
         get
         {
@@ -59,9 +55,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        inputVector = inputHandler.getActionValue<Vector2>(InputHandlerActions.Move);
+        inputVector = inputHandler.GetActionValue<Vector2>(InputHandlerActions.Move);
         // Check for roof crawling
-        if (isUnderRoof())
+        if (IsUnderRoof())
         {
             if (climbing == false)
             {
@@ -89,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
             climbing = false;
             rb.gravityScale = playerGravity;
         }
-        updateAnimationState();
+        UpdateAnimationState();
 
         //currentXVelocity = rb.velocity.x;
     }
@@ -105,11 +101,12 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0f);
         }
 
-        //float smoothXVelocity = Mathf.SmoothDamp(rb.velocity.x, inputVector.x * playerSpeed, ref currentXVelocity, timeToMaxVelocity);
-        rb.velocity = new Vector2(inputVector.x * playerSpeed, rb.velocity.y);
+        float smoothXVelocity = Mathf.SmoothDamp(rb.velocity.x, inputVector.x * PlayerSpeed, ref currentXVelocity, timeToMaxVelocity);
+        rb.velocity = new Vector2(inputVector.x * PlayerSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(smoothXVelocity, rb.velocity.y);
     }
 
-    private void updateAnimationState()
+    private void UpdateAnimationState()
     {
         if (inputVector.x > 0.1f)
         {
@@ -142,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
 
-    private bool isUnderRoof()
+    private bool IsUnderRoof()
     {
         return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.up, .1f, jumpableGround);
     }

@@ -1,29 +1,29 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class PrototypeHeroDemo : MonoBehaviour {
+public class PrototypeHeroDemo : MonoBehaviour
+{
 
     [Header("Variables")]
-    [SerializeField] float      m_maxSpeed = 4.5f;
-    [SerializeField] float      m_jumpForce = 7.5f;
-    [SerializeField] bool       m_hideSword = false;
+    [SerializeField] float m_maxSpeed = 4.5f;
+    [SerializeField] float m_jumpForce = 7.5f;
+    [SerializeField] bool m_hideSword = false;
     [Header("Effects")]
     [SerializeField] GameObject m_RunStopDust;
     [SerializeField] GameObject m_JumpDust;
     [SerializeField] GameObject m_LandingDust;
 
-    private Animator            m_animator;
-    private Rigidbody2D         m_body2d;
-    private Sensor_Prototype    m_groundSensor;
-    private AudioSource         m_audioSource;
+    private Animator m_animator;
+    private Rigidbody2D m_body2d;
+    private Sensor_Prototype m_groundSensor;
+    private AudioSource m_audioSource;
     private AudioManager_PrototypeHero m_audioManager;
-    private bool                m_grounded = false;
-    private bool                m_moving = false;
-    private int                 m_facingDirection = 1;
-    private float               m_disableMovementTimer = 0.0f;
+    private bool m_grounded = false;
+    private bool m_moving = false;
+    private int m_facingDirection = 1;
+    private float m_disableMovementTimer = 0.0f;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
@@ -33,7 +33,7 @@ public class PrototypeHeroDemo : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         // Decrease timer that disables input movement. Used when attacking
         m_disableMovementTimer -= Time.deltaTime;
@@ -73,13 +73,13 @@ public class PrototypeHeroDemo : MonoBehaviour {
             GetComponent<SpriteRenderer>().flipX = false;
             m_facingDirection = 1;
         }
-            
+
         else if (inputRaw < 0)
         {
             GetComponent<SpriteRenderer>().flipX = true;
             m_facingDirection = -1;
         }
-     
+
         // SlowDownSpeed helps decelerate the characters when stopping
         float SlowDownSpeed = m_moving ? 1.0f : 0.5f;
         // Set movement
@@ -104,7 +104,7 @@ public class PrototypeHeroDemo : MonoBehaviour {
         }
 
         //Run
-        else if(m_moving)
+        else if (m_moving)
             m_animator.SetInteger("AnimState", 1);
 
         //Idle

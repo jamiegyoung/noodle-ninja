@@ -1,25 +1,38 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.Rendering.DebugUI;
 
 public enum InputHandlerActions
 {
     Move,
+    Attack
 }
 
 public class InputHandler
 {
-    PlayerInput playerInput;
+    readonly PlayerInput playerInput;
+
     public InputHandler(PlayerInput input)
     {
         playerInput = input;
     }
 
-    public T getActionValue<T>(InputHandlerActions inputType) where T : struct
+    private InputAction GetAction(InputHandlerActions inputType)
     {
-        return playerInput.actions[Enum.GetName(typeof(InputHandlerActions), inputType)].ReadValue<T>();
+        return playerInput.actions[Enum.GetName(typeof(InputHandlerActions), inputType)];
+    }
+
+    public T GetActionValue<T>(InputHandlerActions inputType) where T : struct
+    {
+        return GetAction(inputType).ReadValue<T>();
+    }
+
+    public bool WasPressedThisFrame(InputHandlerActions inputType)
+    {
+        return GetAction(inputType).WasPressedThisFrame();
+    }
+
+    public string GetBindingDisplayString(InputHandlerActions inputType)
+    {
+        return GetAction(inputType).GetBindingDisplayString();
     }
 }
