@@ -1,6 +1,7 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using static ConvertToRad;
 
 // modified version of https://stackoverflow.com/a/643438
 // Removed wrapping and added previous
@@ -53,14 +54,10 @@ public class PlayerDetection : MonoBehaviour
         Attacking
     }
 
-
-
     void Start()
     {
         coll = GetComponent<BoxCollider2D>();
     }
-
-    private float ConvertToRad(float num) => num * (Mathf.PI / 180);
 
     private bool ForCheck(int i, int viewAngleOffset)
     {
@@ -155,15 +152,15 @@ public class PlayerDetection : MonoBehaviour
             if (hasVisionOfPlayer) break;
             float offset = parentRotation.y * 180;
             Vector2 angle = new(
-                lineOfSightDistance * Mathf.Sin(ConvertToRad(offset + i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation))),
-                lineOfSightDistance * Mathf.Cos(ConvertToRad(offset + i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation)))
+                lineOfSightDistance * Mathf.Sin(ConvertToRad.Convert(offset + i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation))),
+                lineOfSightDistance * Mathf.Cos(ConvertToRad.Convert(offset + i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation)))
                 );
 
             RaycastHit2D raycastHit = Physics2D.Raycast(coll.bounds.center, angle, lineOfSightDistance, playerMask + obstacleMask);
             if (raycastHit.collider && raycastHit.collider.gameObject.name == "Player")
             {
                 hasVisionOfPlayer = true;
-                Debug.DrawRay(coll.bounds.center, angle, Color.red);
+                //Debug.DrawRay(coll.bounds.center, angle, Color.red);
                 Quaternion target = Quaternion.LookRotation(
                     raycastHit.collider.gameObject.transform.position - transform.position, transform.TransformDirection(Vector3.up)
                     );
@@ -173,7 +170,7 @@ public class PlayerDetection : MonoBehaviour
             }
             else
             {
-                Debug.DrawRay(coll.bounds.center, angle);
+                //Debug.DrawRay(coll.bounds.center, angle);
             }
         }
         if (hasVisionOfPlayer == false)

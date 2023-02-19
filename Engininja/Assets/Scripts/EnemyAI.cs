@@ -1,13 +1,21 @@
 using UnityEngine;
 using static PlayerDetection;
+using static ConvertToRad;
+using UnityEditor.Experimental.GraphView;
+using static ScoreController;
 
 public class EnemyAI : MonoBehaviour
 {
     //public Transform playerTransform;
     private float lastFlipped;
     private float rotationValue = 0;
-    public PlayerDetection playerDetection;
     private bool _isDead = false;
+    private BoxCollider2D coll;
+    private bool scoreDetectionFlag = false;
+    public float otherEnemiesLineOfSightDistance = 10f;
+    public LayerMask killableMask;
+    public ScoreController scoreController;
+    public PlayerDetection playerDetection;
     public bool IsDead
     {
         get
@@ -16,9 +24,14 @@ public class EnemyAI : MonoBehaviour
         }
         set
         {
+            if (_isDead == value)
+            {
+                return;
+            }
 
             if (value == true)
             {
+                scoreController.AddScore(ScoreConditions.Kill);
                 gameObject.layer = 0;
                 transform.rotation = Quaternion.Euler(0, 0, 90);
             }
@@ -30,6 +43,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         lastFlipped = Time.time;
+        coll = GetComponent<BoxCollider2D>();
         //headTransform = transform.GetChild(0);
     }
 
@@ -37,15 +51,23 @@ public class EnemyAI : MonoBehaviour
     {
         if (IsDead) { return; }
 
+
         switch (playerDetection.alertState)
         {
             case AlertState.Idle:
+                scoreDetectionFlag = false;
                 IdleBehaviour();
                 break;
             case AlertState.Aware:
+                scoreDetectionFlag = false;
                 //idleBehaviour();
                 break;
             case AlertState.Attacking:
+                if (scoreDetectionFlag == false)
+                {
+                    scoreDetectionFlag = true;
+                    scoreController.AddScore(ScoreConditions.Detection);
+                }
                 //idleBehaviour();
                 break;
         }
@@ -61,8 +83,30 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+
+    private void UpdateOtherEnemies()
+    {
+        int viewAngleOffset = (transform.rotation.y == 0) ? 1 : -1;
+        Vector2 angle = Vector2.right * viewAngleOffset * otherEnemiesLineOfSightDistance;
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(coll.bounds.center, angle, otherEnemiesLineOfSightDistance, killableMask);
+        Debug.DrawRay(coll.bounds.center, angle, Color.red);
+        foreach (RaycastHit2D hit in hits)
+        {
+
+            if (!hit.collider) continue;
+            if (!hit.collider.GetComponent<PlayerDetection>()) continue;
+            if (hit.collider.GetComponent<PlayerDetection>().alertState == AlertState.Attacking)
+            {
+                // If another enemy is attacking, this enemy becomes aware
+                playerDetection.alertState = AlertState.Aware;
+            }
+        }
+    }
+
     void Update()
     {
         HandleBehaviour();
+        UpdateOtherEnemies();
     }
 }
