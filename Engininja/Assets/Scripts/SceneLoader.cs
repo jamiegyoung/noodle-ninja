@@ -10,6 +10,7 @@ public class SceneLoader : MonoBehaviour
     public enum Levels
     {
         Menu,
+        Intro,
         Game
     }
 
