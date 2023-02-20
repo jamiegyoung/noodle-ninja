@@ -43,7 +43,11 @@ public class PlayerDetection : MonoBehaviour
     private int alertCounter = 0;
     private float lastAlertTime = 0;
     public AlertState alertState;
-
+    public Transform playerTransform;
+    private float timeSinceLastShot = 0f;
+    private AudioSource gunShotSource;
+    private const float MIN_GUN_AUDIO_DISTANCE = 1f;
+    private const float MAX_GUN_AUDIO_DISTANCE = 30f;
     private const int MAX_ALERT = 250;
     private const int MIN_ALERT = 0;
 
@@ -57,6 +61,42 @@ public class PlayerDetection : MonoBehaviour
     void Start()
     {
         coll = GetComponent<BoxCollider2D>();
+        gunShotSource = GetComponent<AudioSource>();
+    }
+
+    private void Shoot(bool miss)
+    {
+        if (timeSinceLastShot - Time.time < -3f)
+        {
+            timeSinceLastShot = Time.time;
+            // Change volume based on distance
+            float dist = Vector2.Distance(transform.position, playerTransform.position);
+            if (dist < MIN_GUN_AUDIO_DISTANCE)
+            {
+                gunShotSource.volume = 1;
+            }
+            else if (dist > MAX_GUN_AUDIO_DISTANCE)
+            {
+                gunShotSource.volume = 0;
+            }
+            else
+            {
+                // Cur Dist / Max Dist
+                gunShotSource.volume = 1 - ((dist - MIN_GUN_AUDIO_DISTANCE) / (MAX_GUN_AUDIO_DISTANCE - MIN_GUN_AUDIO_DISTANCE));
+            }
+            Debug.Log(gunShotSource.volume);
+
+            gunShotSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+            gunShotSource.Play();
+            if (UnityEngine.Random.Range(0, 10) == 0 || miss)
+            {
+                Debug.Log("missed");
+            }
+            else
+            {
+                Debug.Log("shoot");
+            }
+        }
     }
 
     private bool ForCheck(int i, int viewAngleOffset)
@@ -96,7 +136,7 @@ public class PlayerDetection : MonoBehaviour
         // decrement if down
         if (alertCounter <= MIN_ALERT)
         {
-            Debug.Log(Time.time - lastAlertTime);
+            //Debug.Log(Time.time - lastAlertTime);
             if (Time.time - lastAlertTime > 30f && alertState != AlertState.Idle)
             {
                 alertCounter = MAX_ALERT;
@@ -105,29 +145,29 @@ public class PlayerDetection : MonoBehaviour
         }
     }
 
-    private void UpdateAlertState()
-    {
-        if (alertCounter < (int)AlertState.Aware)
-        {
-            alertState = AlertState.Idle;
-            return;
-        }
-        else if (alertCounter < (int)AlertState.Aware)
-        {
-            alertState = AlertState.Aware;
-        }
-        else if (alertCounter < (int)AlertState.Attacking)
-        {
-            alertState = AlertState.Aware;
-        }
-        else
-        {
-            alertState = AlertState.Attacking;
-        }
-        // Set the last aware time if was aware
-        lastAlertTime = Time.time;
+    //private void UpdateAlertState()
+    //{
+    //    if (alertCounter < (int)AlertState.Aware)
+    //    {
+    //        alertState = AlertState.Idle;
+    //        return;
+    //    }
+    //    else if (alertCounter < (int)AlertState.Aware)
+    //    {
+    //        alertState = AlertState.Aware;
+    //    }
+    //    else if (alertCounter < (int)AlertState.Attacking)
+    //    {
+    //        alertState = AlertState.Aware;
+    //    }
+    //    else
+    //    {
+    //        alertState = AlertState.Attacking;
+    //    }
+    //    // Set the last aware time if was aware
+    //    lastAlertTime = Time.time;
 
-    }
+    //}
 
 
     private void UpdateAlert()
@@ -160,7 +200,7 @@ public class PlayerDetection : MonoBehaviour
             if (raycastHit.collider && raycastHit.collider.gameObject.name == "Player")
             {
                 hasVisionOfPlayer = true;
-                //Debug.DrawRay(coll.bounds.center, angle, Color.red);
+                Debug.DrawRay(coll.bounds.center, angle, Color.red);
                 Quaternion target = Quaternion.LookRotation(
                     raycastHit.collider.gameObject.transform.position - transform.position, transform.TransformDirection(Vector3.up)
                     );
@@ -170,12 +210,24 @@ public class PlayerDetection : MonoBehaviour
             }
             else
             {
-                //Debug.DrawRay(coll.bounds.center, angle);
+                Debug.DrawRay(coll.bounds.center, angle);
             }
         }
         if (hasVisionOfPlayer == false)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), rotationStep);
+            //Panic shot, attacking but no vision
+            if (UnityEngine.Random.Range(0, 20) == 0 && alertState == AlertState.Attacking)
+            {
+                Shoot(true);
+            }
+        }
+        //Can only shoot when attacking and has vision
+        else if (alertState == AlertState.Attacking)
+        {
+
+
+            Shoot(false);
 
         }
     }

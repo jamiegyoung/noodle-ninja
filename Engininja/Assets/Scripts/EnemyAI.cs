@@ -51,7 +51,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (IsDead) { return; }
 
-
+        // Conditional behaviour dependent on the state
+        // Score detection flag prevents duplicate subtracation of scores
         switch (playerDetection.alertState)
         {
             case AlertState.Idle:
@@ -90,7 +91,7 @@ public class EnemyAI : MonoBehaviour
         Vector2 angle = Vector2.right * viewAngleOffset * otherEnemiesLineOfSightDistance;
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(coll.bounds.center, angle, otherEnemiesLineOfSightDistance, killableMask);
-        Debug.DrawRay(coll.bounds.center, angle, Color.red);
+        //Debug.DrawRay(coll.bounds.center, angle, Color.red);
         foreach (RaycastHit2D hit in hits)
         {
 
