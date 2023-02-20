@@ -15,10 +15,10 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {r: 0.6009701, g: 0.6036279, b: 0.6886792, a: 1}
+    m_Value: {r: 0.33103418, g: 0.3390193, b: 0.4056604, a: 1}
   highlights:
     m_OverrideState: 1
-    m_Value: {r: 0.9528302, g: 0.7146226, b: 0.8640862, a: 1}
+    m_Value: {r: 0.9433962, g: 0.7253471, b: 0.73635375, a: 1}
   balance:
     m_OverrideState: 1
     m_Value: 0
@@ -57,13 +57,13 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.405
+    m_Value: 0.9
   response:
     m_OverrideState: 0
-    m_Value: 0.8
+    m_Value: 0.139
   texture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 5
   scatter:
     m_OverrideState: 0
     m_Value: 0.7
@@ -93,7 +93,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 65472
   tint:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.17
+    m_Value: 0.1
 --- !u!114 &4411996423701927065
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -141,10 +141,10 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0.224
   xMultiplier:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   yMultiplier:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   center:
     m_OverrideState: 0
