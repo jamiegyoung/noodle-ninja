@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         inputHandler = new InputHandler(GetComponent<PlayerInput>());
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();

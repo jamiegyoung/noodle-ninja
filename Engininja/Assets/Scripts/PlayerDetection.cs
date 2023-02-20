@@ -44,6 +44,7 @@ public class PlayerDetection : MonoBehaviour
     private float lastAlertTime = 0;
     public AlertState alertState;
     public Transform playerTransform;
+    public PlayerHealth playerHealth;
     private float timeSinceLastShot = 0f;
     private AudioSource gunShotSource;
     private const float MIN_GUN_AUDIO_DISTANCE = 1f;
@@ -88,13 +89,11 @@ public class PlayerDetection : MonoBehaviour
 
             gunShotSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
             gunShotSource.Play();
-            if (UnityEngine.Random.Range(0, 10) == 0 || miss)
-            {
-                Debug.Log("missed");
-            }
-            else
+            // 1 in 10 chance of missing
+            if (UnityEngine.Random.Range(0, 10) != 0 && !miss)
             {
                 Debug.Log("shoot");
+                playerHealth.Damage();
             }
         }
     }
@@ -174,6 +173,8 @@ public class PlayerDetection : MonoBehaviour
     {
         UpdateAlertCounter();
         //UpdateAlertState();
+        if (GetComponentInParent<EnemyAI>().IsDead == true) { return; }
+        HandleLineOfSight();
     }
 
 
@@ -216,19 +217,18 @@ public class PlayerDetection : MonoBehaviour
         if (hasVisionOfPlayer == false)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), rotationStep);
-            //Panic shot, attacking but no vision
-            if (UnityEngine.Random.Range(0, 20) == 0 && alertState == AlertState.Attacking)
+            // Panic shot, attacking but no vision
+            if (UnityEngine.Random.Range(0, 400) == 0 && alertState == AlertState.Attacking)
             {
+                Debug.Log("panic shot");
                 Shoot(true);
             }
         }
         //Can only shoot when attacking and has vision
         else if (alertState == AlertState.Attacking)
         {
-
-
+            Debug.Log("Shooting with vision");
             Shoot(false);
-
         }
     }
 
@@ -250,7 +250,6 @@ public class PlayerDetection : MonoBehaviour
 
     void Update()
     {
-        if (GetComponentInParent<EnemyAI>().IsDead == true) { return; }
-        HandleLineOfSight();
+
     }
 }

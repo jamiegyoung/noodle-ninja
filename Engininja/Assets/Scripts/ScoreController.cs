@@ -15,11 +15,11 @@ public enum ScoreConditions
 public class ScoreController : MonoBehaviour
 {
     private long score;
-    private TextMeshPro textMeshPro;
+    private TextMeshProUGUI textMeshPro;
 
     private void Start()
     {
-        textMeshPro = GetComponent<TextMeshPro>();
+        textMeshPro = GetComponent<TextMeshProUGUI>();
     }
 
     public long AddScore(ScoreConditions condition)
