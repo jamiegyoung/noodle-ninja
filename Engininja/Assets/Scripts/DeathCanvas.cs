@@ -18,4 +18,9 @@ public class DeathCanvas : MonoBehaviour
         Time.timeScale = 0;
         sceneLoader.LoadLevel(SceneLoader.Levels.Game);
     }
+
+    public void MainMenu()
+    {
+        sceneLoader.LoadLevel(SceneLoader.Levels.Menu);
+    }
 }
