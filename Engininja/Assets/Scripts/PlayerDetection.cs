@@ -51,6 +51,9 @@ public class PlayerDetection : MonoBehaviour
     private const float MAX_GUN_AUDIO_DISTANCE = 30f;
     private const int MAX_ALERT = 250;
     private const int MIN_ALERT = 0;
+    private const float REACTION_TIME = 1f;
+    private const float TIME_BETWEEN_SHOTS = 3f;
+    private float timeSeen = 0f;
 
     public enum AlertState
     {
@@ -67,7 +70,7 @@ public class PlayerDetection : MonoBehaviour
 
     private void Shoot(bool miss)
     {
-        if (timeSinceLastShot - Time.time < -3f)
+        if (timeSinceLastShot - Time.time < TIME_BETWEEN_SHOTS * -1)
         {
             timeSinceLastShot = Time.time;
             // Change volume based on distance
@@ -213,8 +216,10 @@ public class PlayerDetection : MonoBehaviour
                 Debug.DrawRay(coll.bounds.center, angle);
             }
         }
+        Debug.Log(timeSeen - Time.time);
         if (hasVisionOfPlayer == false)
         {
+            timeSeen = Time.time;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), rotationStep);
             // Panic shot, attacking but no vision
             if (UnityEngine.Random.Range(0, 400) == 0 && alertState == AlertState.Attacking)
@@ -226,8 +231,12 @@ public class PlayerDetection : MonoBehaviour
         //Can only shoot when attacking and has vision
         else if (alertState == AlertState.Attacking)
         {
-            Debug.Log("Shooting with vision");
-            Shoot(false);
+            if (timeSeen - Time.time < REACTION_TIME * -1)
+            {
+                Debug.Log("Shooting with vision");
+                Shoot(false);
+
+            }
         }
     }
 
