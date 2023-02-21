@@ -79,8 +79,10 @@ public class EnemyAI : MonoBehaviour
         if (lastFlipped - Time.time < -5f)
         {
             lastFlipped = Time.time;
-            rotationValue = (rotationValue + 180) % 360;
-            transform.rotation = Quaternion.Euler(0, rotationValue, 0);
+            //rotationValue = (rotationValue + 180) % 360;
+            Debug.Log("rotating");
+            //transform.rotation = Quaternion.Euler(0, rotationValue, 0);
+            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         }
     }
 

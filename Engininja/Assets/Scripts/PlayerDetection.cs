@@ -182,7 +182,8 @@ public class PlayerDetection : MonoBehaviour
     private void HandleLineOfSight()
     {
         Quaternion parentRotation = transform.parent.transform.rotation;
-        int viewAngleOffset = (parentRotation.y == 0) ? 1 : -1;
+        Debug.Log(transform.parent.transform.localScale.x);
+        int viewAngleOffset = (int)transform.parent.transform.localScale.x;
         // Prevent crashes
         if (viewAngle < 1 || castStep < 1) return;
         hasVisionOfPlayer = false;
@@ -191,10 +192,10 @@ public class PlayerDetection : MonoBehaviour
         {
             // No need to raycast if the player has been found
             if (hasVisionOfPlayer) break;
-            float offset = parentRotation.y * 180;
+            //float offset = parentRotation.y * 180;
             Vector2 angle = new(
-                lineOfSightDistance * Mathf.Sin(ConvertToRad.Convert(offset + i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation))),
-                lineOfSightDistance * Mathf.Cos(ConvertToRad.Convert(offset + i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation)))
+                lineOfSightDistance * Mathf.Sin(ConvertToRad.Convert(i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation) * viewAngleOffset)),
+                lineOfSightDistance * Mathf.Cos(ConvertToRad.Convert(i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation) * viewAngleOffset))
                 );
 
             RaycastHit2D raycastHit = Physics2D.Raycast(coll.bounds.center, angle, lineOfSightDistance, playerMask + obstacleMask);
