@@ -13,7 +13,7 @@ public class EnemyAI : MonoBehaviour
     private BoxCollider2D coll;
     private bool scoreDetectionFlag = false;
     public float otherEnemiesLineOfSightDistance = 10f;
-    public LayerMask killableMask;
+    public LayerMask enemyMask;
     public ScoreController scoreController;
     public PlayerDetection playerDetection;
     public bool IsDead
@@ -57,7 +57,7 @@ public class EnemyAI : MonoBehaviour
         {
             case AlertState.Idle:
                 scoreDetectionFlag = false;
-                IdleBehaviour();
+                //IdleBehaviour();
                 break;
             case AlertState.Aware:
                 scoreDetectionFlag = false;
@@ -92,7 +92,7 @@ public class EnemyAI : MonoBehaviour
         int viewAngleOffset = (transform.rotation.y == 0) ? 1 : -1;
         Vector2 angle = Vector2.right * viewAngleOffset * otherEnemiesLineOfSightDistance;
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(coll.bounds.center, angle, otherEnemiesLineOfSightDistance, killableMask);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(coll.bounds.center, angle, otherEnemiesLineOfSightDistance, enemyMask);
         //Debug.DrawRay(coll.bounds.center, angle, Color.red);
         foreach (RaycastHit2D hit in hits)
         {
