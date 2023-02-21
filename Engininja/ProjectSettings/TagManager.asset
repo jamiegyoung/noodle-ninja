@@ -16,7 +16,7 @@ TagManager:
   - PostProcessing
   - Dead
   - Enemy
-  - 
+  - BlockingInteractable
   - 
   - 
   - 

@@ -39,9 +39,8 @@ public class PlayerAttack : MonoBehaviour
         interactionInformer.Show(new Vector2(hitPos.x - 1.2f, hitPos.y + 2f), inputHandler.GetBindingDisplayString(InputHandlerActions.Attack));
         if (inputHandler.WasPressedThisFrame(InputHandlerActions.Attack))
         {
-            Debug.Log("ATTACK!");
+            Debug.Log("Interaction");
             // Only give forward momentum if enemy
-            Debug.Log(hit.collider.gameObject.layer);
             if (hit.collider.gameObject.layer == 10)
             {
                 rb.velocity = new Vector2(rb.velocity.x + (hitPos.x - transform.position.x) * 50, rb.velocity.y);

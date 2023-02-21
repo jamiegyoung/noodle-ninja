@@ -18,10 +18,18 @@ public class Door : MonoBehaviour, Interactable
 
     public void Interact()
     {
-        anim.SetBool("isOpen", !anim.GetBool("isOpen"));
+        bool isOpen = anim.GetBool("isOpen");
+        anim.SetBool("isOpen", !isOpen);
         coll.isTrigger = !coll.isTrigger;
         shadowCaster.selfShadows = !shadowCaster.selfShadows;
         shadowCaster.castsShadows = !shadowCaster.castsShadows;
+        if (isOpen)
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("BlockingInteractable");
+        } else
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("Interactable");
+        }
     }
 
 }
