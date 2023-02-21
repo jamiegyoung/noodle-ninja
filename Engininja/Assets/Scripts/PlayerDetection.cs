@@ -181,8 +181,6 @@ public class PlayerDetection : MonoBehaviour
 
     private void HandleLineOfSight()
     {
-        Quaternion parentRotation = transform.parent.transform.rotation;
-        Debug.Log(transform.parent.transform.localScale.x);
         int viewAngleOffset = (int)transform.parent.transform.localScale.x;
         // Prevent crashes
         if (viewAngle < 1 || castStep < 1) return;
@@ -247,10 +245,5 @@ public class PlayerDetection : MonoBehaviour
     {
         if (GetComponentInParent<EnemyAI>().IsDead == true) { return; }
         UpdateAlert();
-    }
-
-    void Update()
-    {
-
     }
 }

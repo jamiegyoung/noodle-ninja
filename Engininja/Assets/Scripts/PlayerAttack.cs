@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
 {
 
     public LayerMask interactableMask;
+    public LayerMask enemyMask;
     private SpriteRenderer sprite;
     private BoxCollider2D coll;
     private InputHandler inputHandler;
@@ -26,9 +27,9 @@ public class PlayerAttack : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, GetDirectionVector(), 1f, interactableMask);
+        RaycastHit2D hit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, GetDirectionVector(), 1f, interactableMask + enemyMask);
         if (hit.collider == null)
         {
             interactionInformer.Hide();
@@ -39,8 +40,13 @@ public class PlayerAttack : MonoBehaviour
         if (inputHandler.WasPressedThisFrame(InputHandlerActions.Attack))
         {
             Debug.Log("ATTACK!");
+            // Only give forward momentum if enemy
+            Debug.Log(hit.collider.gameObject.layer);
+            if (hit.collider.gameObject.layer == 10)
+            {
+                rb.velocity = new Vector2(rb.velocity.x + (hitPos.x - transform.position.x) * 50, rb.velocity.y);
+            }
             hit.collider.GetComponent<Interactable>().Interact();
-            rb.velocity = new Vector2(rb.velocity.x + (hitPos.x - transform.position.x) * 50, rb.velocity.y);
         }
     }
 
