@@ -32,7 +32,7 @@ public class EnemyAI : MonoBehaviour
             if (value == true)
             {
                 scoreController.AddScore(ScoreConditions.Kill);
-                gameObject.layer = 0;
+                gameObject.layer = 9;
                 transform.rotation = Quaternion.Euler(0, 0, 90);
             }
             _isDead = value;
