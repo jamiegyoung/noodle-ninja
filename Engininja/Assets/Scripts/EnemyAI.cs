@@ -3,12 +3,12 @@ using static PlayerDetection;
 using static ConvertToRad;
 using UnityEditor.Experimental.GraphView;
 using static ScoreController;
+using static UnityEngine.Rendering.DebugUI;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, Interactable
 {
     //public Transform playerTransform;
     private float lastFlipped;
-    private float rotationValue = 0;
     private bool _isDead = false;
     private BoxCollider2D coll;
     private bool scoreDetectionFlag = false;
@@ -21,21 +21,6 @@ public class EnemyAI : MonoBehaviour
         get
         {
             return _isDead;
-        }
-        set
-        {
-            if (_isDead == value)
-            {
-                return;
-            }
-
-            if (value == true)
-            {
-                scoreController.AddScore(ScoreConditions.Kill);
-                gameObject.layer = 9;
-                transform.rotation = Quaternion.Euler(0, 0, 90);
-            }
-            _isDead = value;
         }
     }
 
@@ -90,13 +75,13 @@ public class EnemyAI : MonoBehaviour
     private void UpdateOtherEnemies()
     {
         int viewAngleOffset = (transform.rotation.y == 0) ? 1 : -1;
-        Vector2 angle = Vector2.right * viewAngleOffset * otherEnemiesLineOfSightDistance;
+        Vector2 angle = otherEnemiesLineOfSightDistance * viewAngleOffset * Vector2.right;
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(coll.bounds.center, angle, otherEnemiesLineOfSightDistance, enemyMask);
         //Debug.DrawRay(coll.bounds.center, angle, Color.red);
         foreach (RaycastHit2D hit in hits)
         {
-
+            // Not an enemy
             if (!hit.collider) continue;
             if (!hit.collider.GetComponent<PlayerDetection>()) continue;
             if (hit.collider.GetComponent<PlayerDetection>().alertState == AlertState.Attacking)
@@ -111,5 +96,17 @@ public class EnemyAI : MonoBehaviour
     {
         HandleBehaviour();
         UpdateOtherEnemies();
+    }
+
+    public void Interact()
+    {
+        if (_isDead == true)
+        {
+            return;
+        }
+        _isDead = true;
+        scoreController.AddScore(ScoreConditions.Kill);
+        gameObject.layer = 9;
+        transform.rotation = Quaternion.Euler(0, 0, 90);
     }
 }

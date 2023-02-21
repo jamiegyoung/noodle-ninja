@@ -422,12 +422,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 300ea1a5869382b43bf6149aba92c4db, type: 3}
+  m_Sprite: {fileID: 287577978, guid: 8ac87db2e10e52449bd29cf10ce444a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.59375, y: 1.40625}
+  m_Size: {x: 0.375, y: 1.375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -446,9 +446,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherEnemiesLineOfSightDistance: 10
-  killableMask:
+  enemyMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   scoreController: {fileID: 0}
   playerDetection: {fileID: 8001567204611640737}
 --- !u!61 &1121753566205750639
@@ -468,8 +468,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.59375, y: 1.40625}
-    newSize: {x: 0.59375, y: 1.40625}
+    oldSize: {x: 0.375, y: 1.375}
+    newSize: {x: 0.375, y: 1.375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_Falling
+  m_Name: Door_Closed
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,8 +19,8 @@ AnimationClip:
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
-    - time: 1
-      value: {fileID: 1219634189, guid: 8ac87db2e10e52449bd29cf10ce444a0, type: 3}
+    - time: 0
+      value: {fileID: 2003607461, guid: 9d1bb832e9ab12d4887d88c629b46577, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -40,13 +40,13 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 1219634189, guid: 8ac87db2e10e52449bd29cf10ce444a0, type: 3}
+    - {fileID: 2003607461, guid: 9d1bb832e9ab12d4887d88c629b46577, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 2
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
