@@ -9,7 +9,7 @@ public class Stairs : MonoBehaviour, Interactable
     private SpriteRenderer sprite;
     public Vector2 targetLocation;
 
-    public void Interact(InteractionInformer interactionInformer)
+    public void Interact()
     {
         bool isFlipped = sprite.flipX;
         //const flipped = playerTransform.localScale.

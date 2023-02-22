@@ -139,7 +139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3375159196697538600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.21, z: 0}
+  m_LocalPosition: {x: 0, y: 1.291, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -216,7 +216,7 @@ MonoBehaviour:
     m_Bits: 64
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 6152
   lineOfSightDistance: 12
   viewAngle: 60
   castStep: 6
@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 6731460616421594073}
   - component: {fileID: 1121753566205750639}
   - component: {fileID: 7706368648079301255}
+  - component: {fileID: 651226411073608400}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -374,7 +375,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5539291632111803523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: -2, z: 0}
+  m_LocalPosition: {x: 15, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -449,10 +450,12 @@ MonoBehaviour:
   otherEnemiesLineOfSightDistance: 10
   enemyMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   scoreController: {fileID: 0}
   playerDetection: {fileID: 8001567204611640737}
   deathAudio: {fileID: 7706368648079301255}
+  flipX: 0
+  idleFlip: 0
 --- !u!61 &1121753566205750639
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -463,7 +466,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.703125}
@@ -575,3 +578,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &651226411073608400
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539291632111803523}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 5

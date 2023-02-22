@@ -16,7 +16,7 @@ public class Door : MonoBehaviour, Interactable
         shadowCaster = GetComponent<ShadowCaster2D>();
     }
 
-    public void Interact(InteractionInformer interactionInformer)
+    public void Interact()
     {
         bool isOpen = anim.GetBool("isOpen");
         anim.SetBool("isOpen", !isOpen);

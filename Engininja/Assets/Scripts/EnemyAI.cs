@@ -17,6 +17,8 @@ public class EnemyAI : MonoBehaviour, Interactable
     public ScoreController scoreController;
     public PlayerDetection playerDetection;
     public AudioSource deathAudio;
+    public bool flipX;
+    public bool idleFlip;
     public bool IsDead
     {
         get
@@ -28,8 +30,16 @@ public class EnemyAI : MonoBehaviour, Interactable
 
     void Start()
     {
-        lastFlipped = Time.time;
+        if (idleFlip)
+        {
+            lastFlipped = Time.time;
+
+        }
         coll = GetComponent<BoxCollider2D>();
+        if (flipX)
+        {
+            FlipX();
+        }
         //headTransform = transform.GetChild(0);
     }
 
@@ -43,7 +53,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         {
             case AlertState.Idle:
                 scoreDetectionFlag = false;
-                //IdleBehaviour();
+                IdleBehaviour();
                 break;
             case AlertState.Aware:
                 scoreDetectionFlag = false;
@@ -62,16 +72,20 @@ public class EnemyAI : MonoBehaviour, Interactable
 
     private void IdleBehaviour()
     {
-        if (lastFlipped - Time.time < -5f)
+        if (idleFlip && lastFlipped - Time.time < -5f)
         {
-            lastFlipped = Time.time;
-            //rotationValue = (rotationValue + 180) % 360;
-            Debug.Log("rotating");
-            //transform.rotation = Quaternion.Euler(0, rotationValue, 0);
-            transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            FlipX();
         }
     }
 
+    private void FlipX()
+    {
+        lastFlipped = Time.time;
+        //rotationValue = (rotationValue + 180) % 360;
+        Debug.Log("rotating");
+        //transform.rotation = Quaternion.Euler(0, rotationValue, 0);
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+    }
 
     private void UpdateOtherEnemies()
     {
@@ -99,7 +113,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         UpdateOtherEnemies();
     }
 
-    public void Interact(InteractionInformer interactionInformer)
+    public void Interact()
     {
         deathAudio.pitch = Random.Range(0.85f, 1.15f);
         deathAudio.Play();

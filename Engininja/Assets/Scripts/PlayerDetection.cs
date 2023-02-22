@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using static ConvertToRad;
@@ -232,7 +233,7 @@ public class PlayerDetection : MonoBehaviour
         //Can only shoot when attacking and has vision
         else if (alertState == AlertState.Attacking)
         {
-            if (timeSeen - Time.time < REACTION_TIME * -1)
+            if (timeSeen - Time.time < (REACTION_TIME * -1) - UnityEngine.Random.Range(0f, 1f))
             {
                 Debug.Log("Shooting with vision");
                 Shoot(false);
