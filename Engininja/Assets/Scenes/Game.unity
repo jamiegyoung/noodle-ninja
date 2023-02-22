@@ -12593,6 +12593,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 287577978, guid: 8ac87db2e10e52449bd29cf10ce444a0, type: 3}
     - target: {fileID: 6938851253113418168, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938851253113418168, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 876894251
+      objectReference: {fileID: 0}
+    - target: {fileID: 6938851253113418168, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -12602,11 +12610,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6938851253113418169, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.04
+      value: 7.987
       objectReference: {fileID: 0}
     - target: {fileID: 6938851253113418169, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -2.742
       objectReference: {fileID: 0}
     - target: {fileID: 6938851253113418169, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16371,6 +16379,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3146947079222742694, guid: 6fc085967b3f583438ae9cb4911f6d42, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146947079222742694, guid: 6fc085967b3f583438ae9cb4911f6d42, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146947079222742694, guid: 6fc085967b3f583438ae9cb4911f6d42, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -949348971
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458812091511465902, guid: 6fc085967b3f583438ae9cb4911f6d42, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 403300105}
     - target: {fileID: 3458812091511465902, guid: 6fc085967b3f583438ae9cb4911f6d42, type: 3}
       propertyPath: enemyGenerator
       value: 
