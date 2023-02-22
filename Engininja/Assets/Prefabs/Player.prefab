@@ -365,7 +365,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -387,7 +387,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 287577978, guid: 8ac87db2e10e52449bd29cf10ce444a0, type: 3}
-  m_Color: {r: 0.19215688, g: 0.23529413, b: 0.22352943, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -527,10 +527,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2176
   enemyMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!114 &6938851253113418160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,4 +574,4 @@ MonoBehaviour:
   - {x: 0.049621582, y: 0.0382843, z: 0}
   m_ShapePathHash: -2056489707
   m_Mesh: {fileID: 0}
-  m_InstanceId: 66540
+  m_InstanceId: 115824
