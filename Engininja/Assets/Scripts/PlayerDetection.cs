@@ -40,7 +40,7 @@ public class PlayerDetection : MonoBehaviour
     public int viewAngle = 50;
     public int castStep = 2;
     public float rotationStep = .02f;
-    private bool hasVisionOfPlayer = false;
+    public bool hasVisionOfPlayer = false;
     private int alertCounter = 0;
     private float lastAlertTime = 0;
     public AlertState alertState;

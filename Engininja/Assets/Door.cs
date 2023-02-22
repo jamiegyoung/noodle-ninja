@@ -9,6 +9,8 @@ public class Door : MonoBehaviour, Interactable
     private Collider2D coll;
     private ShadowCaster2D shadowCaster;
 
+    public bool IsInteractable => true;
+
     private void Start()
     {
         anim = GetComponent<Animator>();

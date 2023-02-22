@@ -9,6 +9,8 @@ public class Stairs : MonoBehaviour, Interactable
     private SpriteRenderer sprite;
     public Vector2 targetLocation;
 
+    public bool IsInteractable => true;
+
     public void Interact()
     {
         bool isFlipped = sprite.flipX;

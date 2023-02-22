@@ -27,6 +27,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         }
     }
 
+    public bool IsInteractable => true;
 
     void Start()
     {

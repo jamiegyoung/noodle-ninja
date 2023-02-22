@@ -46,7 +46,15 @@ public class PlayerInteract : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x + (hitPos.x - transform.position.x) * 50, rb.velocity.y);
             }
-            hit.collider.GetComponent<Interactable>().Interact();
+            Interactable interactable = hit.collider.GetComponent<Interactable>();
+            if (interactable.IsInteractable)
+            {
+                Debug.Log("Interacting");
+                interactable.Interact();
+            } else
+            {
+                Debug.Log("Interaction blocked");
+            }
         }
     }
 
