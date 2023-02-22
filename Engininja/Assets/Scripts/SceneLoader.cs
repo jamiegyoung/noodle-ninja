@@ -24,7 +24,7 @@ public class SceneLoader : MonoBehaviour
         animator.SetTrigger("Start");
 
         yield return new WaitForSecondsRealtime(.3f);
-
+        Time.timeScale = 1f;
         SceneManager.LoadScene((int)level);
     }
 }

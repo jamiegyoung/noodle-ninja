@@ -222,7 +222,7 @@ RectTransform:
   - {fileID: 1010043731}
   - {fileID: 2101545274}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -363,7 +363,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &410865006
 MonoBehaviour:
@@ -398,6 +398,17 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &430087708 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2397671899222876857, guid: e94a5c31bf543454db8325894d8b8bc4, type: 3}
+  m_PrefabInstance: {fileID: 2031847102}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02631512b998304197c45bdb80e82f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &542924437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,17 +1217,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1311446759 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7577122183886844362, guid: e94a5c31bf543454db8325894d8b8bc4, type: 3}
-  m_PrefabInstance: {fileID: 2031847102}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02631512b998304197c45bdb80e82f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1317149502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,7 +1479,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1785061586
 GameObject:
@@ -1682,7 +1682,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2031847102
 PrefabInstance:
@@ -1691,6 +1691,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2711795612481393581, guid: e94a5c31bf543454db8325894d8b8bc4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 54
+      objectReference: {fileID: 0}
     - target: {fileID: 3324961317362332706, guid: e94a5c31bf543454db8325894d8b8bc4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1981,7 +1985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5888582f7a37546429eb4bc0f611c862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneLoader: {fileID: 1311446759}
+  sceneLoader: {fileID: 430087708}
 --- !u!114 &2101545276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2138,7 +2142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff47d94acce53d479c167f604b5d8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneLoader: {fileID: 1311446759}
+  sceneLoader: {fileID: 0}
 --- !u!4 &2138634380
 Transform:
   m_ObjectHideFlags: 0
