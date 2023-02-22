@@ -34,7 +34,7 @@ public class PlayerInteract : MonoBehaviour
             return;
         }
         Vector3 hitPos = hit.collider.transform.position;
-        interactionInformer.Show(new Vector2(hitPos.x - 1.2f, hitPos.y + 2f), inputHandler.GetBindingDisplayString(InputHandlerActions.Attack));
+        interactionInformer.Show(new Vector2(hitPos.x, hitPos.y + hit.collider.bounds.size.y + 0.3f), inputHandler.GetBindingDisplayString(InputHandlerActions.Attack));
         if (hit.collider != null)
         {
             Debug.Log("Interaction Possible with layer");
