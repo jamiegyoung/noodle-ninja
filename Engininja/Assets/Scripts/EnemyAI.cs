@@ -98,7 +98,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         UpdateOtherEnemies();
     }
 
-    public void Interact()
+    public void Interact(InteractionInformer interactionInformer)
     {
         if (_isDead == true)
         {

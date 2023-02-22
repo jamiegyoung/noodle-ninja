@@ -53,6 +53,7 @@ public class PlayerDetection : MonoBehaviour
     private const int MIN_ALERT = 0;
     private const float REACTION_TIME = 1f;
     private const float TIME_BETWEEN_SHOTS = 3f;
+    private const int ALERT_INCREASE_SPEED = 8;
     private float timeSeen = 0f;
 
     public enum AlertState
@@ -119,7 +120,7 @@ public class PlayerDetection : MonoBehaviour
         if (hasVisionOfPlayer && alertCounter < MAX_ALERT + 50)
         {
             // goes up 3 times quicker than down
-            alertCounter += 3;
+            alertCounter += ALERT_INCREASE_SPEED;
             lastAlertTime = Time.time;
         }
         else if (!hasVisionOfPlayer && alertCounter > MIN_ALERT)
