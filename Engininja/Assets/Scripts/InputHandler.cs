@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 public enum InputHandlerActions
 {
     Move,
-    Attack
+    Attack,
+    Pause
 }
 
 public class InputHandler
