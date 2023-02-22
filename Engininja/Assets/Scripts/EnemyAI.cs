@@ -16,6 +16,7 @@ public class EnemyAI : MonoBehaviour, Interactable
     public LayerMask enemyMask;
     public ScoreController scoreController;
     public PlayerDetection playerDetection;
+    public AudioSource deathAudio;
     public bool IsDead
     {
         get
@@ -100,6 +101,7 @@ public class EnemyAI : MonoBehaviour, Interactable
 
     public void Interact(InteractionInformer interactionInformer)
     {
+        deathAudio.Play();
         if (_isDead == true)
         {
             return;
