@@ -8,8 +8,9 @@ public class Door : MonoBehaviour, Interactable
     private Animator anim;
     private Collider2D coll;
     private ShadowCaster2D shadowCaster;
+    public bool isLocked;
 
-    public bool IsInteractable => true;
+    public bool IsInteractable => !isLocked;
 
     private void Start()
     {
