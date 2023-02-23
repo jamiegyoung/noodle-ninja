@@ -11,6 +11,8 @@ public class Door : MonoBehaviour, Interactable
     public bool isLocked;
 
     public bool IsInteractable => !isLocked;
+    public AudioSource openAudio;
+    public AudioSource closeAudio;
 
     private void Start()
     {
@@ -33,10 +35,12 @@ public class Door : MonoBehaviour, Interactable
         shadowCaster.castsShadows = !open;
         if (open)
         {
+            openAudio.Play();
             this.gameObject.layer = LayerMask.NameToLayer("Interactable");
         }
         else
         {
+            closeAudio.Play();
             this.gameObject.layer = LayerMask.NameToLayer("BlockingInteractable");
         }
     }
