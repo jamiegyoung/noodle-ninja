@@ -41,11 +41,14 @@ public class PlayerDetection : MonoBehaviour
     public int castStep = 2;
     public float rotationStep = .02f;
     public bool hasVisionOfPlayer = false;
-    private int alertCounter = 0;
-    private float lastAlertTime = 0;
     public AlertState alertState;
     public Transform playerTransform;
     public PlayerHealth playerHealth;
+    public AudioSource awareAudio;
+    public AudioSource attackingAudio;
+
+    private int alertCounter = 0;
+    private float lastAlertTime = 0;
     private float timeSinceLastShot = 0f;
     private AudioSource gunShotSource;
     private const float MIN_GUN_AUDIO_DISTANCE = 1f;
@@ -135,6 +138,13 @@ public class PlayerDetection : MonoBehaviour
             // make sure we don't loop up and down
             alertCounter = MIN_ALERT + 5;
             alertState = alertState.Next();
+            switch (alertState)
+            {
+                case AlertState.Attacking:
+                    attackingAudio.Play(); break;
+                case AlertState.Aware:
+                    awareAudio.Play(); break;
+            }
         }
 
         // decrement if down
