@@ -12,6 +12,7 @@ public class Switch : MonoBehaviour, Interactable
     public Doors doors;
     public GameObject ceilingLights;
     private Light2D[] _ceilingLights;
+    private AudioSource audioSource;
 
     public void Interact()
     {
@@ -28,6 +29,7 @@ public class Switch : MonoBehaviour, Interactable
         {
             light.intensity = isOn ? 0.9f : 0f;
         }
+        audioSource.Play();
     }
 
     // Start is called before the first frame update
@@ -35,7 +37,7 @@ public class Switch : MonoBehaviour, Interactable
     {
         anim = GetComponent<Animator>();
         light2d = GetComponent<Light2D>();
+        audioSource = GetComponent<AudioSource>();
         _ceilingLights = ceilingLights.GetComponentsInChildren<Light2D>();
-
     }
 }
