@@ -34,11 +34,22 @@ public class PlayerInteract : MonoBehaviour
             return;
         }
         Vector3 hitPos = hit.collider.transform.position;
-        interactionInformer.Show(new Vector2(hitPos.x, hitPos.y + hit.collider.bounds.size.y + 0.3f), inputHandler.GetBindingDisplayString(InputHandlerActions.Attack));
         if (hit.collider != null)
         {
             Debug.Log("Interaction Possible with layer");
         }
+        Interactable interactable = hit.collider.GetComponent<Interactable>();
+
+        Vector2 interactionInformerPos = new(hitPos.x, hitPos.y + hit.collider.bounds.size.y + 0.3f);
+        if (interactable.IsInteractable)
+        {
+            interactionInformer.Show(interactionInformerPos, inputHandler.GetBindingDisplayString(InputHandlerActions.Attack));
+        }
+        else
+        {
+            interactionInformer.ShowLock(interactionInformerPos);
+        }
+
         if (inputHandler.WasPressedThisFrame(InputHandlerActions.Attack))
         {
             // Only give forward momentum if enemy
@@ -46,12 +57,12 @@ public class PlayerInteract : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x + (hitPos.x - transform.position.x) * 50, rb.velocity.y);
             }
-            Interactable interactable = hit.collider.GetComponent<Interactable>();
             if (interactable.IsInteractable)
             {
                 Debug.Log("Interacting");
                 interactable.Interact();
-            } else
+            }
+            else
             {
                 Debug.Log("Interaction blocked");
             }
