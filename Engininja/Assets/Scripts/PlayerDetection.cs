@@ -46,6 +46,7 @@ public class PlayerDetection : MonoBehaviour
     public PlayerHealth playerHealth;
     public AudioSource awareAudio;
     public AudioSource attackingAudio;
+    public AudioSource bulletMiss;
 
     private int alertCounter = 0;
     private float lastAlertTime = 0;
@@ -93,8 +94,6 @@ public class PlayerDetection : MonoBehaviour
                 // Cur Dist / Max Dist
                 gunShotSource.volume = 1 - ((dist - MIN_GUN_AUDIO_DISTANCE) / (MAX_GUN_AUDIO_DISTANCE - MIN_GUN_AUDIO_DISTANCE));
             }
-            Debug.Log(gunShotSource.volume);
-
             gunShotSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
             gunShotSource.Play();
             // 1 in 10 chance of missing
@@ -102,6 +101,10 @@ public class PlayerDetection : MonoBehaviour
             {
                 Debug.Log("shoot");
                 playerHealth.Damage();
+            }
+            else
+            {
+                bulletMiss.PlayDelayed(.2f);
             }
         }
     }
