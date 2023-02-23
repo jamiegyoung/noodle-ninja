@@ -36,7 +36,7 @@ public class PlayerInteract : MonoBehaviour
         Vector3 hitPos = hit.collider.transform.position;
         if (hit.collider != null)
         {
-            Debug.Log("Interaction Possible with layer");
+            //Debug.Log("Interaction Possible with layer");
         }
         Interactable interactable = hit.collider.GetComponent<Interactable>();
 

@@ -22,18 +22,22 @@ public class Door : MonoBehaviour, Interactable
     public void Interact()
     {
         bool isOpen = anim.GetBool("isOpen");
-        anim.SetBool("isOpen", !isOpen);
-        coll.isTrigger = !coll.isTrigger;
-        shadowCaster.selfShadows = !shadowCaster.selfShadows;
-        shadowCaster.castsShadows = !shadowCaster.castsShadows;
-        if (isOpen)
-        {
-            this.gameObject.layer = LayerMask.NameToLayer("BlockingInteractable");
-        }
-        else
+        set(!isOpen);
+    }
+
+    public void set(bool open)
+    {
+        anim.SetBool("isOpen", open);
+        coll.isTrigger = open;
+        shadowCaster.selfShadows = !open;
+        shadowCaster.castsShadows = !open;
+        if (open)
         {
             this.gameObject.layer = LayerMask.NameToLayer("Interactable");
         }
+        else
+        {
+            this.gameObject.layer = LayerMask.NameToLayer("BlockingInteractable");
+        }
     }
-
 }
