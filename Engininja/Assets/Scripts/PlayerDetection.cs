@@ -218,7 +218,6 @@ public class PlayerDetection : MonoBehaviour
                 Debug.DrawRay(coll.bounds.center, angle);
             }
         }
-        Debug.Log(timeSeen - Time.time);
         if (hasVisionOfPlayer == false)
         {
             timeSeen = Time.time;
