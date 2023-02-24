@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour, Interactable
     public PlayerDetection playerDetection;
     public AudioSource deathAudio;
     public bool flipX;
+    public SpriteRenderer alertSpriteRenderer;
     public bool idleFlip;
     public bool IsDead
     {
@@ -86,6 +87,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         Debug.Log("rotating");
         //transform.rotation = Quaternion.Euler(0, rotationValue, 0);
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        alertSpriteRenderer.flipX = !alertSpriteRenderer.flipX;
     }
 
     private void UpdateOtherEnemies()

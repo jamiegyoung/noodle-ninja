@@ -47,6 +47,9 @@ public class PlayerDetection : MonoBehaviour
     public AudioSource awareAudio;
     public AudioSource attackingAudio;
     public AudioSource bulletMiss;
+    public Sprite awareSprite;
+    public Sprite attackingSprite;
+    public SpriteRenderer alertStateSprite;
 
     private int alertCounter = 0;
     private float lastAlertTime = 0;
@@ -59,6 +62,7 @@ public class PlayerDetection : MonoBehaviour
     private const float REACTION_TIME = 1f;
     private const float TIME_BETWEEN_SHOTS = 3f;
     private const int ALERT_INCREASE_SPEED = 8;
+    private const float LOS_VERTICAL_OFFSET = .8f;
     private float timeSeen = 0f;
 
     public enum AlertState
@@ -162,35 +166,30 @@ public class PlayerDetection : MonoBehaviour
         }
     }
 
-    //private void UpdateAlertState()
-    //{
-    //    if (alertCounter < (int)AlertState.Aware)
-    //    {
-    //        alertState = AlertState.Idle;
-    //        return;
-    //    }
-    //    else if (alertCounter < (int)AlertState.Aware)
-    //    {
-    //        alertState = AlertState.Aware;
-    //    }
-    //    else if (alertCounter < (int)AlertState.Attacking)
-    //    {
-    //        alertState = AlertState.Aware;
-    //    }
-    //    else
-    //    {
-    //        alertState = AlertState.Attacking;
-    //    }
-    //    // Set the last aware time if was aware
-    //    lastAlertTime = Time.time;
+    private void UpdateAlertVisuals()
+    {
+        switch (alertState)
+        {
+            case AlertState.Idle:
+                alertStateSprite.enabled = false;
+                break;
+            case AlertState.Attacking:
+                alertStateSprite.enabled = true;
+                alertStateSprite.sprite = attackingSprite;
+                break;
+            case AlertState.Aware:
+                alertStateSprite.enabled = true;
+                alertStateSprite.sprite = awareSprite;
+                break;
+        }
 
-    //}
+    }
 
 
     private void UpdateAlert()
     {
         UpdateAlertCounter();
-        //UpdateAlertState();
+        UpdateAlertVisuals();
         if (GetComponentInParent<EnemyAI>().IsDead == true) { return; }
         HandleLineOfSight();
     }
@@ -213,12 +212,19 @@ public class PlayerDetection : MonoBehaviour
                 lineOfSightDistance * Mathf.Sin(ConvertToRad.Convert(i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation) * viewAngleOffset)),
                 lineOfSightDistance * Mathf.Cos(ConvertToRad.Convert(i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation) * viewAngleOffset))
                 );
-
-            RaycastHit2D raycastHit = Physics2D.Raycast(coll.bounds.center, angle, lineOfSightDistance, playerMask + obstacleMask);
+            Vector3 origin = new Vector3(
+                    coll.bounds.center.x,
+                    coll.bounds.center.y + LOS_VERTICAL_OFFSET,
+                    coll.bounds.center.z
+                    );
+            RaycastHit2D raycastHit = Physics2D.Raycast(origin
+                ,
+                angle, lineOfSightDistance, playerMask + obstacleMask
+               );
             if (raycastHit.collider && raycastHit.collider.gameObject.name == "Player")
             {
                 hasVisionOfPlayer = true;
-                Debug.DrawRay(coll.bounds.center, angle, Color.red);
+                Debug.DrawRay(origin, angle, Color.red);
                 Quaternion target = Quaternion.LookRotation(
                     raycastHit.collider.gameObject.transform.position - transform.position, transform.TransformDirection(Vector3.up)
                     );
@@ -228,7 +234,7 @@ public class PlayerDetection : MonoBehaviour
             }
             else
             {
-                Debug.DrawRay(coll.bounds.center, angle);
+                Debug.DrawRay(origin, angle);
             }
         }
         if (hasVisionOfPlayer == false)

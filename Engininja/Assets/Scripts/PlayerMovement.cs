@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private InputHandler inputHandler;
     private float currentXVelocity = 0f;
     private Vector2 inputVector = Vector2.zero;
-    private bool climbing = false;
+    private float lastJumpTime = float.NegativeInfinity;
 
     private enum AnimationState
     {
@@ -38,61 +38,17 @@ public class PlayerMovement : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
     }
 
-    private float PlayerSpeed
-    {
-        get
-        {
-            if (climbing)
-            {
-                return maxPlayerSpeed * .5f;
-            }
-            return maxPlayerSpeed;
-        }
-    }
-
-    private bool hasReleasedJump = false;
-
     void Update()
     {
         inputVector = inputHandler.GetActionValue<Vector2>(InputHandlerActions.Move);
-        // Check for roof crawling
-        if (IsUnderRoof())
-        {
-            if (climbing == false)
-            {
-                climbing = true;
-                rb.gravityScale = 0f;
-                hasReleasedJump = false;
-            }
-            if (inputVector.y <= 0f)
-            {
-                hasReleasedJump = true;
-            }
-
-            if (hasReleasedJump)
-            {
-
-                if (inputVector.y < 0f || inputVector.y > 0f)
-                {
-                    rb.gravityScale = playerGravity;
-                }
-
-            }
-        }
-        else
-        {
-            climbing = false;
-            rb.gravityScale = playerGravity;
-        }
         UpdateAnimationState();
-
-        //currentXVelocity = rb.velocity.x;
     }
 
     private void FixedUpdate()
     {
         if (inputVector.y > .1f && IsGrounded())
         {
+            lastJumpTime = Time.time;
             rb.velocity = new Vector2(rb.velocity.x, playerJumpHeight);
         }
         else if (inputVector.y <= 0f && rb.velocity.y > 0f)
@@ -100,8 +56,8 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0f);
         }
 
-        float smoothXVelocity = Mathf.SmoothDamp(rb.velocity.x, inputVector.x * PlayerSpeed, ref currentXVelocity, timeToMaxVelocity);
-        rb.velocity = new Vector2(inputVector.x * PlayerSpeed, rb.velocity.y);
+        float smoothXVelocity = Mathf.SmoothDamp(rb.velocity.x, inputVector.x * maxPlayerSpeed, ref currentXVelocity, timeToMaxVelocity);
+        rb.velocity = new Vector2(inputVector.x * maxPlayerSpeed, rb.velocity.y);
         rb.velocity = new Vector2(smoothXVelocity, rb.velocity.y);
     }
 
@@ -135,11 +91,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
-    }
-
-    private bool IsUnderRoof()
-    {
-        return Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.up, .1f, jumpableGround);
+        if (lastJumpTime - Time.time > -.5f) { return false; }
+        return Physics2D.BoxCast(coll.bounds.center, Vector3.Scale(coll.bounds.size, new Vector3(0.9f, 1f, 0.9f)), 0f, Vector2.down, .1f, jumpableGround);
     }
 }
