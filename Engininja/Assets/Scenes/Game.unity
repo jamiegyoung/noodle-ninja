@@ -12220,10 +12220,6 @@ PrefabInstance:
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6938851253113418170, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6938851253113418170, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}

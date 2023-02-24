@@ -225,8 +225,9 @@ public class PlayerDetection : MonoBehaviour
             {
                 hasVisionOfPlayer = true;
                 Debug.DrawRay(origin, angle, Color.red);
+                Vector3 targetPos = raycastHit.collider.gameObject.transform.position;
                 Quaternion target = Quaternion.LookRotation(
-                    raycastHit.collider.gameObject.transform.position - transform.position, transform.TransformDirection(Vector3.up)
+                    new Vector3(targetPos.x, targetPos.y + .5f, 0) - transform.position, transform.TransformDirection(Vector3.up)
                     );
 
                 transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(0, 0, target.z, target.w), rotationStep);
