@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     private float currentXVelocity = 0f;
     private Vector2 inputVector = Vector2.zero;
     private float lastJumpTime = float.NegativeInfinity;
+    private float timeSinceLastFootstep;
+    private bool leftFoot = false;
+    public AudioSource leftFootAudio;
+    public AudioSource rightFootAudio;
 
     private enum AnimationState
     {
@@ -61,15 +65,36 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(smoothXVelocity, rb.velocity.y);
     }
 
+    private void PlayWalkAudio()
+    {
+        Debug.Log(timeSinceLastFootstep - Time.time);
+        if (timeSinceLastFootstep - Time.time > -0.3f || !IsGrounded()) { return; }
+        timeSinceLastFootstep = Time.time;
+        if (leftFoot)
+        {
+            leftFoot = false;
+            leftFootAudio.pitch = Random.Range(0.9f, 1.1f);
+            leftFootAudio.Play();
+        }
+        else
+        {
+            leftFoot = true;
+            leftFootAudio.pitch = Random.Range(0.9f, 1.1f);
+            rightFootAudio.Play();
+        }
+    }
+
     private void UpdateAnimationState()
     {
         if (inputVector.x > 0.1f)
         {
+            PlayWalkAudio();
             state = AnimationState.running;
             sprite.flipX = false;
         }
         else if (inputVector.x < -0.1f)
         {
+            PlayWalkAudio();
             state = AnimationState.running;
             sprite.flipX = true;
         }
