@@ -27,6 +27,15 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        float speed;
+        if (pd.alertState == PlayerDetection.AlertState.Idle)
+        {
+            speed = enemySpeed;
+        }
+        else
+        {
+            speed = enemySpeed * 2;
+        }
         Vector2 tmpLocation = new(targetLocation.x, targetLocation.y + 0.5f);
         if (coll.bounds.Contains(tmpLocation))
         {
@@ -42,7 +51,7 @@ public class EnemyMovement : MonoBehaviour
         //Debug.Log("setting flip due to movement to " + isFlipped);
         enemyAI.flipX = isFlipped;
         float directionMultiplier = isFlipped ? 1 : -1;
-        float smoothXVel = Mathf.SmoothDamp(rb.velocity.x, enemySpeed * directionMultiplier * -1, ref currentXVelocity, timeToMaxVelocity);
+        float smoothXVel = Mathf.SmoothDamp(rb.velocity.x, speed * directionMultiplier * -1, ref currentXVelocity, timeToMaxVelocity);
         rb.velocity = new Vector2(smoothXVel, rb.velocity.y);
     }
 }
