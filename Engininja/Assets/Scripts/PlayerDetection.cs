@@ -64,6 +64,7 @@ public class PlayerDetection : MonoBehaviour
     private const int ALERT_INCREASE_SPEED = 8;
     private const float LOS_VERTICAL_OFFSET = .8f;
     private float timeSeen = 0f;
+    public float timeSinceLastSeenPlayer = 0f;
     public Vector3 lastSeenPlayerLocation;
 
     public enum AlertState
@@ -232,6 +233,7 @@ public class PlayerDetection : MonoBehaviour
                     );
                 this.lastSeenPlayerLocation = targetPos;
                 transform.rotation = Quaternion.Slerp(transform.rotation, new Quaternion(0, 0, target.z, target.w), rotationStep);
+                timeSinceLastSeenPlayer = Time.time;
             }
             else
             {

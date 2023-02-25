@@ -9,16 +9,19 @@ public class EnemyMovement : MonoBehaviour
     public bool atTargetLocation = false;
     private Collider2D coll;
     private Rigidbody2D rb;
+    private PlayerDetection pd;
     public EnemyAI enemyAI;
     public float enemySpeed;
     private float currentXVelocity = 0f;
     public float timeToMaxVelocity;
+    public float timeUntilContinueAfterSeen = 3f;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
         enemyAI = GetComponent<EnemyAI>();
+        pd = GetComponentInChildren<PlayerDetection>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,10 @@ public class EnemyMovement : MonoBehaviour
         if (coll.bounds.Contains(tmpLocation))
         {
             atTargetLocation = true;
+            return;
+        }
+        if (pd.timeSinceLastSeenPlayer - Time.time > timeUntilContinueAfterSeen * -1)
+        {
             return;
         }
         atTargetLocation = false;

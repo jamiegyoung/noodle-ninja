@@ -235,6 +235,7 @@ MonoBehaviour:
   awareSprite: {fileID: 21300000, guid: 6bd5a3007c32995489c107dc148c8918, type: 3}
   attackingSprite: {fileID: 21300000, guid: 0c8a083270e849f4fbaa794265bb099b, type: 3}
   alertStateSprite: {fileID: 7493620563702229856}
+  timeSinceLastSeenPlayer: 0
   lastSeenPlayerLocation: {x: 0, y: 0, z: 0}
 --- !u!61 &1504739933376379127
 BoxCollider2D:
@@ -807,8 +808,10 @@ MonoBehaviour:
   scoreController: {fileID: 0}
   playerDetection: {fileID: 8001567204611640737}
   deathAudio: {fileID: 6873522317398264850}
-  flipX: 0
   alertSpriteRenderer: {fileID: 7493620563702229856}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 6152
   idleFlip: 0
 --- !u!61 &1121753566205750639
 BoxCollider2D:
@@ -970,6 +973,7 @@ MonoBehaviour:
   enemyAI: {fileID: 6731460616421594073}
   enemySpeed: 2
   timeToMaxVelocity: 0.05
+  timeUntilContinueAfterSeen: 3
 --- !u!1 &7263058657799487281
 GameObject:
   m_ObjectHideFlags: 0
