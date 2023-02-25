@@ -35,7 +35,7 @@ public class EnemyGenerator : MonoBehaviour
             enemyAI.enemyMask = enemyMask;
             enemyAI.scoreController = scoreController;
             enemyAI.idleFlip = enemy.idleFlip;
-            enemyAI.flipX = enemy.flipX;
+            enemyAI.FlipX = enemy.flipX;
             PlayerDetection playerDetection = duplicate.GetComponentInChildren<PlayerDetection>();
             playerDetection.playerHealth = playerHealth;
             playerDetection.playerTransform = playerTransform;

@@ -13,8 +13,9 @@ public class EnemyMovement : MonoBehaviour
     public EnemyAI enemyAI;
     public float enemySpeed;
     private float currentXVelocity = 0f;
-    public float timeToMaxVelocity;
+    public float timeToMaxVelocity = 0.1f;
     public float timeUntilContinueAfterSeen = 3f;
+    private bool? originalFlip;
 
     private void Start()
     {
@@ -36,20 +37,25 @@ public class EnemyMovement : MonoBehaviour
         {
             speed = enemySpeed * 2;
         }
+
         Vector2 tmpLocation = new(targetLocation.x, targetLocation.y + 0.5f);
         if (coll.bounds.Contains(tmpLocation))
         {
+            enemyAI.FlipX = originalFlip ?? false;
             atTargetLocation = true;
             return;
         }
+
         if (pd.timeSinceLastSeenPlayer - Time.time > timeUntilContinueAfterSeen * -1)
         {
             return;
         }
+
+        originalFlip ??= enemyAI.FlipX;
         atTargetLocation = false;
         bool isFlipped = transform.position.x > targetLocation.x;
         //Debug.Log("setting flip due to movement to " + isFlipped);
-        enemyAI.flipX = isFlipped;
+        enemyAI.FlipX = isFlipped;
         float directionMultiplier = isFlipped ? 1 : -1;
         float smoothXVel = Mathf.SmoothDamp(rb.velocity.x, speed * directionMultiplier * -1, ref currentXVelocity, timeToMaxVelocity);
         rb.velocity = new Vector2(smoothXVel, rb.velocity.y);

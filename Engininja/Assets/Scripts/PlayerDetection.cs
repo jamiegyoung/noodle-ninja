@@ -170,6 +170,7 @@ public class PlayerDetection : MonoBehaviour
 
     private void UpdateAlertVisuals()
     {
+        alertStateSprite.flipX = playerTransform.localScale.x > 0;
         switch (alertState)
         {
             case AlertState.Idle:
