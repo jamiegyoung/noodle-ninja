@@ -67,7 +67,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayWalkAudio()
     {
-        Debug.Log(timeSinceLastFootstep - Time.time);
         if (timeSinceLastFootstep - Time.time > -0.3f || !IsGrounded()) { return; }
         timeSinceLastFootstep = Time.time;
         if (leftFoot)
@@ -106,6 +105,10 @@ public class PlayerMovement : MonoBehaviour
         if (rb.velocity.y < -.1f)
         {
             state = AnimationState.falling;
+            if (IsGrounded())
+            {
+
+            }
         }
         else if (rb.velocity.y > .1f)
         {

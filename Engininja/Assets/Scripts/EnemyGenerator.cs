@@ -8,6 +8,7 @@ public struct Enemy
     public bool flipX;
     public float waitTime;
     public bool idleFlip;
+    public Vector2 targetLocation;
 }
 
 public class EnemyGenerator : MonoBehaviour
@@ -38,6 +39,8 @@ public class EnemyGenerator : MonoBehaviour
             PlayerDetection playerDetection = duplicate.GetComponentInChildren<PlayerDetection>();
             playerDetection.playerHealth = playerHealth;
             playerDetection.playerTransform = playerTransform;
+            EnemyMovement enemyMovement = duplicate.GetComponentInChildren<EnemyMovement>();
+            enemyMovement.targetLocation = enemy.targetLocation;
             enemyGameObjects[i] = duplicate;
         }
     }

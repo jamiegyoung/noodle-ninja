@@ -235,6 +235,7 @@ MonoBehaviour:
   awareSprite: {fileID: 21300000, guid: 6bd5a3007c32995489c107dc148c8918, type: 3}
   attackingSprite: {fileID: 21300000, guid: 0c8a083270e849f4fbaa794265bb099b, type: 3}
   alertStateSprite: {fileID: 7493620563702229856}
+  lastSeenPlayerLocation: {x: 0, y: 0, z: 0}
 --- !u!61 &1504739933376379127
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -711,6 +712,7 @@ GameObject:
   - component: {fileID: 1121753566205750639}
   - component: {fileID: 651226411073608400}
   - component: {fileID: 6873522317398264850}
+  - component: {fileID: 2041547364583195980}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -854,7 +856,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!82 &6873522317398264850
 AudioSource:
   m_ObjectHideFlags: 0
@@ -951,6 +953,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2041547364583195980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5539291632111803523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36951c0f9c1c07c40b74cd607ee9c9ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLocation: {x: 0, y: 0}
+  atTargetLocation: 0
+  enemyAI: {fileID: 6731460616421594073}
+  enemySpeed: 2
+  timeToMaxVelocity: 0.05
 --- !u!1 &7263058657799487281
 GameObject:
   m_ObjectHideFlags: 0

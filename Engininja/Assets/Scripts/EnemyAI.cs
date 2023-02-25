@@ -12,14 +12,15 @@ public class EnemyAI : MonoBehaviour, Interactable
     private bool _isDead = false;
     private BoxCollider2D coll;
     private bool scoreDetectionFlag = false;
+    private EnemyMovement enemyMovement;
     public float otherEnemiesLineOfSightDistance = 10f;
     public LayerMask enemyMask;
     public ScoreController scoreController;
     public PlayerDetection playerDetection;
     public AudioSource deathAudio;
-    public bool flipX;
     public SpriteRenderer alertSpriteRenderer;
     public bool idleFlip;
+    private bool _flipX;
     public bool IsDead
     {
         get
@@ -28,26 +29,41 @@ public class EnemyAI : MonoBehaviour, Interactable
         }
     }
 
+    public bool flipX
+    {
+        get
+        {
+            Debug.Log("Getting Flip");
+            return _flipX;
+        }
+        set
+        {
+            lastFlipped = Time.time;
+            //rotationValue = (rotationValue + 180) % 360;
+            Debug.Log("Setting Flip to " + value);
+            //transform.rotation = Quaternion.Euler(0, rotationValue, 0);
+            transform.localScale = new Vector3(value ? -1 : 1, transform.localScale.y, transform.localScale.z);
+            _flipX = value;
+        }
+    }
+
     public bool IsInteractable => true;
 
     void Start()
     {
+        //_flipX = flipX;
+        enemyMovement = GetComponent<EnemyMovement>();
         if (idleFlip)
         {
             lastFlipped = Time.time;
 
         }
         coll = GetComponent<BoxCollider2D>();
-        if (flipX)
-        {
-            FlipX();
-        }
-        //headTransform = transform.GetChild(0);
     }
 
     private void HandleBehaviour()
     {
-        if (IsDead) { return; }
+        if (IsDead || !enemyMovement.atTargetLocation) { return; }
 
         // Conditional behaviour dependent on the state
         // Score detection flag prevents duplicate subtracation of scores
@@ -55,7 +71,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         {
             case AlertState.Idle:
                 scoreDetectionFlag = false;
-                IdleBehaviour();
+                //IdleBehaviour();
                 break;
             case AlertState.Aware:
                 scoreDetectionFlag = false;
@@ -72,38 +88,35 @@ public class EnemyAI : MonoBehaviour, Interactable
         }
     }
 
-    private void IdleBehaviour()
-    {
-        if (idleFlip && lastFlipped - Time.time < -5f)
-        {
-            FlipX();
-        }
-    }
+    //private void IdleBehaviour()
+    //{
+    //    if (idleFlip && lastFlipped - Time.time < -5f)
+    //    {
+    //        //FlipX();
+    //    }
+    //}
 
-    private void FlipX()
-    {
-        lastFlipped = Time.time;
-        //rotationValue = (rotationValue + 180) % 360;
-        Debug.Log("rotating");
-        //transform.rotation = Quaternion.Euler(0, rotationValue, 0);
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        alertSpriteRenderer.flipX = !alertSpriteRenderer.flipX;
-    }
+    //private void FlipX()
+    //{
+    //    flipX = !flipX;
+    //}
 
     private void UpdateOtherEnemies()
     {
-        int viewAngleOffset = (transform.rotation.y == 0) ? 1 : -1;
+        int viewAngleOffset = (transform.localScale.x == 1) ? 1 : -1;
         Vector2 angle = otherEnemiesLineOfSightDistance * viewAngleOffset * Vector2.right;
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(coll.bounds.center, angle, otherEnemiesLineOfSightDistance, enemyMask);
-        //Debug.DrawRay(coll.bounds.center, angle, Color.red);
+        Debug.DrawRay(coll.bounds.center, angle, Color.red);
         foreach (RaycastHit2D hit in hits)
         {
             // Not an enemy
             if (!hit.collider) continue;
-            if (!hit.collider.GetComponent<PlayerDetection>()) continue;
-            if (hit.collider.GetComponent<PlayerDetection>().alertState == AlertState.Attacking)
+            PlayerDetection otherPlayerDetection = hit.collider.GetComponentInChildren<PlayerDetection>();
+            if (!otherPlayerDetection) continue;
+            if (otherPlayerDetection.alertState == AlertState.Attacking)
             {
+                Debug.Log("can see other enemy attacking");
                 // If another enemy is attacking, this enemy becomes aware
                 playerDetection.alertState = AlertState.Aware;
             }
