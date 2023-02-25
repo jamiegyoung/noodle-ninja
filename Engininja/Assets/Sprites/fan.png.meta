@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9f7875cf17d927f43ac3c8b39183faeb
+guid: 7948de8ec5c683f4b86b4248721acab5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -141,13 +141,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: glass_shards_0
+      name: fan_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 4
-        height: 4
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,20 +155,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94aab933b228a13409bfc0782e1e4eb3
-      internalID: -2108247044
+      spriteID: b65fcf6a6dbc5bd43a1853402375ef0b
+      internalID: -860335044
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: glass_shards_1
+      name: fan_1
       rect:
         serializedVersion: 2
-        x: 4
+        x: 32
         y: 0
-        width: 4
-        height: 4
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,20 +176,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7fa4a426a0f7ba24ab75853054b6e9e8
-      internalID: -1759154674
+      spriteID: dda9163fda4886c4d9cf7d9d064c5345
+      internalID: 1712106533
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: glass_shards_2
+      name: fan_2
       rect:
         serializedVersion: 2
-        x: 8
+        x: 64
         y: 0
-        width: 4
-        height: 4
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +197,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8cd7ebbcd7e41b14dac9191e9044f2b7
-      internalID: 129390661
+      spriteID: e10c85bc7f288cd4ea8f6d61ee5eb7ea
+      internalID: 1779236633
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: glass_shards_3
+      name: fan_3
       rect:
         serializedVersion: 2
-        x: 12
+        x: 96
         y: 0
-        width: 4
-        height: 4
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,8 +218,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da73f91f21e13654383498c2f3b734d0
-      internalID: -1858501165
+      spriteID: 693f9f975c1af224a9a801204592282d
+      internalID: -252167659
       vertices: []
       indices: 
       edges: []
@@ -235,10 +235,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      glass_shards_0: -2108247044
-      glass_shards_2: 129390661
-      glass_shards_1: -1759154674
-      glass_shards_3: -1858501165
+      fan_3: -252167659
+      fan_0: -860335044
+      fan_2: 1779236633
+      fan_1: 1712106533
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
