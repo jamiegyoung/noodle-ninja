@@ -5,22 +5,12 @@ using UnityEngine;
 public class Stairs : MonoBehaviour, Interactable
 {
     public GameObject player;
-    private Transform playerTransform;
-    private SpriteRenderer sprite;
     public Vector2 targetLocation;
 
     public bool IsInteractable => true;
 
-    public void Interact()
+    public void Interact(GameObject interactor)
     {
-        bool isFlipped = sprite.flipX;
-        //const flipped = playerTransform.localScale.
-        playerTransform.position = targetLocation;
-    }
-
-    private void Start()
-    {
-        playerTransform = player.GetComponent<Transform>();
-        sprite = player.GetComponent<SpriteRenderer>();
+        interactor.transform.position = targetLocation;
     }
 }

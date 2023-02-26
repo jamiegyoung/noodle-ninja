@@ -60,7 +60,7 @@ public class PlayerInteract : MonoBehaviour
             if (interactable.IsInteractable)
             {
                 Debug.Log("Interacting");
-                interactable.Interact();
+                interactable.Interact(gameObject);
             }
             else
             {

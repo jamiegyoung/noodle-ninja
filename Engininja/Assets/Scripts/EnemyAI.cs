@@ -131,7 +131,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         UpdateOtherEnemies();
     }
 
-    public void Interact()
+    public void Interact(GameObject interactor)
     {
         deathAudio.pitch = Random.Range(0.85f, 1.15f);
         deathAudio.Play();

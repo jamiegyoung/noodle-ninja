@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public struct RoomTransitions
+{
+    public Room toRoom;
+    public GameObject interactableGameObject;
+}
+
+[System.Serializable]
 public class Room : MonoBehaviour
 {
-    public Vector2 prevStairsLocation;
-    public Vector2 nextStairsLocation;
-    public Room nextRoom;
-    public Room previousRoom;
+    public RoomTransitions[] roomTransitions;
 }

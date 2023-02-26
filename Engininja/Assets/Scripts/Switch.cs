@@ -14,7 +14,7 @@ public class Switch : MonoBehaviour, Interactable
     private Light2D[] _ceilingLights;
     private AudioSource audioSource;
 
-    public void Interact()
+    public void Interact(GameObject interactor)
     {
         isOn = !isOn;
         doors.setLocked(isOn);

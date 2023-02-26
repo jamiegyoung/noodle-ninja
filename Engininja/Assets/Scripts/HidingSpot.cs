@@ -14,19 +14,19 @@ public class HidingSpot : MonoBehaviour, Interactable
     private Rigidbody2D playerRigidbody;
     private SpriteRenderer playerSpriteRenderer;
     private ShadowCaster2D playerShadowCaster2D;
-    private AudioSource audio;
+    private AudioSource hidingAudio;
 
     private void Start()
     {
         playerRigidbody = player.GetComponent<Rigidbody2D>();
         playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
         playerShadowCaster2D = player.GetComponent<ShadowCaster2D>();
-        audio = gameObject.GetComponent<AudioSource>();
+        hidingAudio = gameObject.GetComponent<AudioSource>();
     }
 
-    public void Interact()
+    public void Interact(GameObject interactor)
     {
-        audio.Play();
+        hidingAudio.Play();
         Debug.Log("HIDING");
         if (isHiding)
         {

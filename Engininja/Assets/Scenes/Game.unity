@@ -2233,10 +2233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4bd5c7ad6da334e9de2c60065c014b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prevStairsLocation: {x: 0, y: 0}
-  nextStairsLocation: {x: 27, y: -2.8}
-  nextRoom: {fileID: 1352049630}
-  previousRoom: {fileID: 0}
+  roomTransitions:
+  - toRoom: {fileID: 1352049630}
+    interactableGameObject: {fileID: 440897563}
 --- !u!1 &403300105 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6938851253113418119, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
@@ -3470,10 +3469,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4bd5c7ad6da334e9de2c60065c014b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prevStairsLocation: {x: 0, y: 0}
-  nextStairsLocation: {x: 0, y: 0}
-  nextRoom: {fileID: 0}
-  previousRoom: {fileID: 1086240868}
+  roomTransitions:
+  - toRoom: {fileID: 1086240868}
+    interactableGameObject: {fileID: 1638248563}
+  - toRoom: {fileID: 2079100792}
+    interactableGameObject: {fileID: 1584226704}
 --- !u!4 &615363481 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5140385760488724873, guid: 4e0be1bf7f59fc74ea7cddef5990bb56, type: 3}
@@ -4103,170 +4103,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!43 &737507296
-Mesh:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 10
-  m_SubMeshes:
-  - serializedVersion: 2
-    firstByte: 0
-    indexCount: 42
-    topology: 0
-    baseVertex: 0
-    firstVertex: 0
-    vertexCount: 16
-    localAABB:
-      m_Center: {x: -0.0071105957, y: 0.60686874, z: 0}
-      m_Extent: {x: 0.056732178, y: 0.56858444, z: 0}
-  m_Shapes:
-    vertices: []
-    shapes: []
-    channels: []
-    fullWeights: []
-  m_BindPose: []
-  m_BoneNameHashes: 
-  m_RootBoneNameHash: 0
-  m_BonesAABB: []
-  m_VariableBoneCountWeights:
-    m_Data: 
-  m_MeshCompression: 0
-  m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
-  m_IndexFormat: 0
-  m_IndexBuffer: 00000100020000000300010004000300000004000500030004000600050006000400070002000800000000000900040001000a00020003000b00010005000c00030004000d00070006000e00050007000f000600
-  m_VertexData:
-    serializedVersion: 3
-    m_VertexCount: 16
-    m_Channels:
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 3
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 12
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 28
-      format: 0
-      dimension: 4
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    m_DataSize: 704
-    _typelessdata: 00404b3d00d01c3d000000000bfc7f3fd910343c000000800000008000404b3d00d01c3d00404b3d00d01c3d0040183dc0e7953f00000000643f873df1707f3f00000080000000800040183dc0e7953f0040183dc0e7953f00c0313d40ce1a3f000000000bfc7f3fd910343c00000080000000800040183dc0e7953f00404b3d00d01c3d0000953b802e963f00000000643f873df1707f3f00000080000000800000e6bc4075963f0040183dc0e7953f0000e9bb00b0233d00000000c742f2bc56e37fbf000000000000008000404b3d00d01c3d00c082bd00902a3d0000e6bc4075963f000000006bdf7fbf5a25013d00000080000000800000e6bc4075963f0000e6bc4075963f00403cbdc0c91b3f000000006bdf7fbf5a25013d000000800000008000c082bd00902a3d0000e6bc4075963f00c082bd00902a3d00000000c742f2bc56e37fbf000000000000008000c082bd00902a3d00c082bd00902a3d00c0313d40ce1a3f000000000bfc7f3fd910343c00000080000000800040183dc0e7953f00404b3d00d01c3d00404b3d00d01c3d00000000c742f2bc56e37fbf000000000000008000404b3d00d01c3d00404b3d00d01c3d0040183dc0e7953f000000000bfc7f3fd910343c00000080000000800040183dc0e7953f0040183dc0e7953f0000953b802e963f00000000643f873df1707f3f00000080000000800000e6bc4075963f0040183dc0e7953f0000e6bc4075963f00000000643f873df1707f3f00000080000000800000e6bc4075963f0000e6bc4075963f0000e9bb00b0233d00000000c742f2bc56e37fbf000000000000008000404b3d00d01c3d00c082bd00902a3d00403cbdc0c91b3f000000006bdf7fbf5a25013d000000800000008000c082bd00902a3d0000e6bc4075963f00c082bd00902a3d000000006bdf7fbf5a25013d000000800000008000c082bd00902a3d00c082bd00902a3d
-  m_CompressedMesh:
-    m_Vertices:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UV:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Normals:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Tangents:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Weights:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_NormalSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_TangentSigns:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_FloatColors:
-      m_NumItems: 0
-      m_Range: 0
-      m_Start: 0
-      m_Data: 
-      m_BitSize: 0
-    m_BoneIndices:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_Triangles:
-      m_NumItems: 0
-      m_Data: 
-      m_BitSize: 0
-    m_UVInfo: 0
-  m_LocalAABB:
-    m_Center: {x: -0.0071105957, y: 0.60686874, z: 0}
-    m_Extent: {x: 0.056732178, y: 0.56858444, z: 0}
-  m_MeshUsageFlags: 0
-  m_BakedConvexCollisionMesh: 
-  m_BakedTriangleCollisionMesh: 
-  m_MeshMetrics[0]: 1
-  m_MeshMetrics[1]: 1
-  m_MeshOptimizationFlags: 1
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!1 &743954187
 GameObject:
   m_ObjectHideFlags: 0
@@ -4582,10 +4418,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4bd5c7ad6da334e9de2c60065c014b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prevStairsLocation: {x: 0, y: 0}
-  nextStairsLocation: {x: 27, y: -2.8}
-  nextRoom: {fileID: 1352049630}
-  previousRoom: {fileID: 0}
+  roomTransitions:
+  - toRoom: {fileID: 2097043047}
+    interactableGameObject: {fileID: 1181106436}
+  - toRoom: {fileID: 1295406601}
+    interactableGameObject: {fileID: 1782328739}
 --- !u!61 &801527800
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4612,6 +4449,170 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 11.257432, y: 3.6788626}
   m_EdgeRadius: 0
+--- !u!43 &806601024
+Mesh:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 10
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 42
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 16
+    localAABB:
+      m_Center: {x: -0.0071105957, y: 0.60686874, z: 0}
+      m_Extent: {x: 0.056732178, y: 0.56858444, z: 0}
+  m_Shapes:
+    vertices: []
+    shapes: []
+    channels: []
+    fullWeights: []
+  m_BindPose: []
+  m_BoneNameHashes: 
+  m_RootBoneNameHash: 0
+  m_BonesAABB: []
+  m_VariableBoneCountWeights:
+    m_Data: 
+  m_MeshCompression: 0
+  m_IsReadable: 1
+  m_KeepVertices: 1
+  m_KeepIndices: 1
+  m_IndexFormat: 0
+  m_IndexBuffer: 00000100020000000300010004000300000004000500030004000600050006000400070002000800000000000900040001000a00020003000b00010005000c00030004000d00070006000e00050007000f000600
+  m_VertexData:
+    serializedVersion: 3
+    m_VertexCount: 16
+    m_Channels:
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 3
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 12
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 28
+      format: 0
+      dimension: 4
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 704
+    _typelessdata: 00404b3d00d01c3d000000000bfc7f3fd910343c000000800000008000404b3d00d01c3d00404b3d00d01c3d0040183dc0e7953f00000000643f873df1707f3f00000080000000800040183dc0e7953f0040183dc0e7953f00c0313d40ce1a3f000000000bfc7f3fd910343c00000080000000800040183dc0e7953f00404b3d00d01c3d0000953b802e963f00000000643f873df1707f3f00000080000000800000e6bc4075963f0040183dc0e7953f0000e9bb00b0233d00000000c742f2bc56e37fbf000000000000008000404b3d00d01c3d00c082bd00902a3d0000e6bc4075963f000000006bdf7fbf5a25013d00000080000000800000e6bc4075963f0000e6bc4075963f00403cbdc0c91b3f000000006bdf7fbf5a25013d000000800000008000c082bd00902a3d0000e6bc4075963f00c082bd00902a3d00000000c742f2bc56e37fbf000000000000008000c082bd00902a3d00c082bd00902a3d00c0313d40ce1a3f000000000bfc7f3fd910343c00000080000000800040183dc0e7953f00404b3d00d01c3d00404b3d00d01c3d00000000c742f2bc56e37fbf000000000000008000404b3d00d01c3d00404b3d00d01c3d0040183dc0e7953f000000000bfc7f3fd910343c00000080000000800040183dc0e7953f0040183dc0e7953f0000953b802e963f00000000643f873df1707f3f00000080000000800000e6bc4075963f0040183dc0e7953f0000e6bc4075963f00000000643f873df1707f3f00000080000000800000e6bc4075963f0000e6bc4075963f0000e9bb00b0233d00000000c742f2bc56e37fbf000000000000008000404b3d00d01c3d00c082bd00902a3d00403cbdc0c91b3f000000006bdf7fbf5a25013d000000800000008000c082bd00902a3d0000e6bc4075963f00c082bd00902a3d000000006bdf7fbf5a25013d000000800000008000c082bd00902a3d00c082bd00902a3d
+  m_CompressedMesh:
+    m_Vertices:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UV:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Normals:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Tangents:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Weights:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_NormalSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_TangentSigns:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_FloatColors:
+      m_NumItems: 0
+      m_Range: 0
+      m_Start: 0
+      m_Data: 
+      m_BitSize: 0
+    m_BoneIndices:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_Triangles:
+      m_NumItems: 0
+      m_Data: 
+      m_BitSize: 0
+    m_UVInfo: 0
+  m_LocalAABB:
+    m_Center: {x: -0.0071105957, y: 0.60686874, z: 0}
+    m_Extent: {x: 0.056732178, y: 0.56858444, z: 0}
+  m_MeshUsageFlags: 0
+  m_BakedConvexCollisionMesh: 
+  m_BakedTriangleCollisionMesh: 
+  m_MeshMetrics[0]: 1
+  m_MeshMetrics[1]: 1
+  m_MeshOptimizationFlags: 1
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!43 &818606201
 Mesh:
   m_ObjectHideFlags: 0
@@ -11745,10 +11746,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4bd5c7ad6da334e9de2c60065c014b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prevStairsLocation: {x: 0, y: 0}
-  nextStairsLocation: {x: 0, y: 0}
-  nextRoom: {fileID: 605591800}
-  previousRoom: {fileID: 1352049630}
+  roomTransitions:
+  - toRoom: {fileID: 1352049630}
+    interactableGameObject: {fileID: 478922344}
+  - toRoom: {fileID: 605591800}
+    interactableGameObject: {fileID: 1638248563}
+  - toRoom: {fileID: 2097043047}
+    interactableGameObject: {fileID: 1336037478}
 --- !u!1 &1102637450
 GameObject:
   m_ObjectHideFlags: 0
@@ -12704,11 +12708,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6938851253113418169, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.27
+      value: 25.81
       objectReference: {fileID: 0}
     - target: {fileID: 6938851253113418169, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.742
+      value: 2.36
       objectReference: {fileID: 0}
     - target: {fileID: 6938851253113418169, guid: 196eb7fad8f789841893564adc7865c6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17994,7 +17998,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295406599}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18014,10 +18018,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4bd5c7ad6da334e9de2c60065c014b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prevStairsLocation: {x: 0, y: 0}
-  nextStairsLocation: {x: 27, y: -2.8}
-  nextRoom: {fileID: 1352049630}
-  previousRoom: {fileID: 0}
+  roomTransitions:
+  - toRoom: {fileID: 801527799}
+    interactableGameObject: {fileID: 1782328739}
+  - toRoom: {fileID: 1581988817}
+    interactableGameObject: {fileID: 1684137670}
 --- !u!61 &1295406602
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18429,10 +18434,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4bd5c7ad6da334e9de2c60065c014b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prevStairsLocation: {x: 31, y: 1.2}
-  nextStairsLocation: {x: 26.8, y: 1.2}
-  nextRoom: {fileID: 1086240868}
-  previousRoom: {fileID: 389414430}
+  roomTransitions:
+  - toRoom: {fileID: 389414430}
+    interactableGameObject: {fileID: 440897563}
+  - toRoom: {fileID: 1086240868}
+    interactableGameObject: {fileID: 214292849}
 --- !u!1001 &1359323374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50894,10 +50900,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4bd5c7ad6da334e9de2c60065c014b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prevStairsLocation: {x: 0, y: 0}
-  nextStairsLocation: {x: 27, y: -2.8}
-  nextRoom: {fileID: 1352049630}
-  previousRoom: {fileID: 0}
+  roomTransitions:
+  - toRoom: {fileID: 1295406601}
+    interactableGameObject: {fileID: 1502143986}
 --- !u!61 &1581988818
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -50985,6 +50990,79 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be9a77dbbe62abb478a7ed985a3797d0, type: 3}
+--- !u!1 &1584226704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1584226705}
+  - component: {fileID: 1584226707}
+  - component: {fileID: 1584226706}
+  m_Layer: 7
+  m_Name: InteractionStairs (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1584226705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584226704}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.74, y: 1.2, z: 0}
+  m_LocalScale: {x: 1.17, y: 0.4, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1686510142}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1584226706
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584226704}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1584226707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584226704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e0daae5e05dcb44a28dfa60059ab44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 403300105}
+  targetLocation: {x: 12.42, y: 5}
 --- !u!1 &1589269434
 GameObject:
   m_ObjectHideFlags: 0
@@ -56601,6 +56679,79 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6923888536345790412, guid: a0cee91b4e18b4247898962dc7da7401, type: 3}
   m_PrefabInstance: {fileID: 1541393318}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1958856460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1958856461}
+  - component: {fileID: 1958856463}
+  - component: {fileID: 1958856462}
+  m_Layer: 7
+  m_Name: InteractionStairs (7)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1958856461
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958856460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.42, y: 5.2, z: 0}
+  m_LocalScale: {x: 1.17, y: 0.4, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1686510142}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1958856462
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958856460}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1958856463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958856460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e0daae5e05dcb44a28dfa60059ab44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 403300105}
+  targetLocation: {x: 15.74, y: 0.8}
 --- !u!1 &2007025647
 GameObject:
   m_ObjectHideFlags: 0
@@ -57197,7 +57348,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079100790}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -57217,10 +57368,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4bd5c7ad6da334e9de2c60065c014b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prevStairsLocation: {x: 0, y: 0}
-  nextStairsLocation: {x: 27, y: -2.8}
-  nextRoom: {fileID: 1352049630}
-  previousRoom: {fileID: 0}
+  roomTransitions:
+  - toRoom: {fileID: 605591800}
+    interactableGameObject: {fileID: 1958856460}
+  - toRoom: {fileID: 2097043047}
+    interactableGameObject: {fileID: 557955212}
 --- !u!61 &2079100793
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -57513,10 +57665,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4bd5c7ad6da334e9de2c60065c014b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prevStairsLocation: {x: 0, y: 0}
-  nextStairsLocation: {x: 27, y: -2.8}
-  nextRoom: {fileID: 1352049630}
-  previousRoom: {fileID: 0}
+  roomTransitions:
+  - toRoom: {fileID: 2079100792}
+    interactableGameObject: {fileID: 557955212}
+  - toRoom: {fileID: 801527799}
+    interactableGameObject: {fileID: 1181106436}
 --- !u!61 &2097043048
 BoxCollider2D:
   m_ObjectHideFlags: 0
