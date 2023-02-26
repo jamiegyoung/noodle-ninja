@@ -16,6 +16,13 @@ public class Room : MonoBehaviour
     public Collider2D coll;
     public RoomTransition[] roomTransitions;
 
+    public static float CalcCost(Vector2 a, Vector2 b)
+    {
+        float absX = Mathf.Abs(a.x - b.x);
+        float absY = Mathf.Abs(a.y - b.y);
+        return absX + absY;
+    }
+
     private void Start()
     {
         coll = GetComponent<Collider2D>();

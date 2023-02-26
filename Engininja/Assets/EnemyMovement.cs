@@ -47,6 +47,7 @@ public class EnemyMovement : MonoBehaviour
         private float h = 0;
         private float g = 0;
         public RoomNode parent;
+        public Vector2 fromTransitionLocation;
 
         public void SetG(float value)
         {
@@ -94,7 +95,8 @@ public class EnemyMovement : MonoBehaviour
         List<RoomNode> closedList = new();
         RoomNode startingNode = new()
         {
-            room = currentRoom
+            room = currentRoom,
+            fromTransitionLocation = currentRoom.transform.position
         };
         openList.Add(startingNode);
 
@@ -110,14 +112,23 @@ public class EnemyMovement : MonoBehaviour
                 RoomNode successor = new()
                 {
                     room = roomTransition.toRoom,
-                    parent = q
+                    parent = q,
+                    fromTransitionLocation = roomTransition.interactableGameObject.transform.position,
                 };
                 if (successor.room == targetRoom)
                 {
                     return successor;
                 }
                 // Cost to get to parent + cost to get to this node
-                successor.SetG(q.GetG() + roomTransition.cost);
+                if (q.parent == null)
+                {
+                    successor.SetG(q.GetG() + roomTransition.cost);
+                }
+                else
+                {
+                    float calcCost = Room.CalcCost(roomTransition.interactableGameObject.transform.position, q.fromTransitionLocation);
+                    successor.SetG(q.GetG() + calcCost);
+                }
                 successor.SetH(CalcHeuristic(currentRoom, successor.room));
                 // Check if a node with the same pos has a lower f, if so ignore this one
                 int sameOpenlistNodeIndex = openList.FindIndex(c => c.room.coll.bounds.center == successor.room.coll.bounds.center);
