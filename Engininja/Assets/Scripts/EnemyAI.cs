@@ -103,7 +103,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         Vector2 angle = otherEnemiesLineOfSightDistance * viewAngleOffset * Vector2.right;
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(coll.bounds.center, angle, otherEnemiesLineOfSightDistance, enemyMask + obstacleMask);
-        Debug.DrawRay(coll.bounds.center, angle, Color.red);
+        //Debug.DrawRay(coll.bounds.center, angle, Color.red);
         foreach (RaycastHit2D hit in hits)
         {
             // Not an enemy

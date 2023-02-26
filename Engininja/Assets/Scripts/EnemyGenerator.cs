@@ -22,6 +22,7 @@ public class EnemyGenerator : MonoBehaviour
     public PlayerHealth playerHealth;
     private List<GameObject> enemyGameObjects = new List<GameObject>();
     public GameObject roomsContainer;
+    public LayerMask interactableMask;
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class EnemyGenerator : MonoBehaviour
             EnemyMovement enemyMovement = duplicate.GetComponentInChildren<EnemyMovement>();
             enemyMovement.targetLocation = enemy.targetLocation;
             enemyMovement.roomsContainer = roomsContainer;
+            enemyMovement.interactableMask = interactableMask;
             enemyGameObjects.Add(Instantiate(duplicate));
         }
     }

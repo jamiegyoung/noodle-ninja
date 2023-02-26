@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -19,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
     public float timeUntilContinueAfterSeen = 3f;
     public GameObject roomsContainer;
     private List<Room> rooms;
+    public LayerMask interactableMask;
     private const float HEURISTICS_WEIGHT = .5f;
 
 
@@ -31,9 +33,9 @@ public class EnemyMovement : MonoBehaviour
         rooms = roomsContainer.GetComponentsInChildren<Room>().ToList();
     }
 
-    void TraverseOwnRoom(float speed)
+    void TraverseOwnRoom(float speed, Vector2 target)
     {
-        bool isFlipped = transform.position.x > targetLocation.x;
+        bool isFlipped = transform.position.x > target.x;
         //Debug.Log("setting flip due to movement to " + isFlipped);
         enemyAI.FlipX = isFlipped;
         float directionMultiplier = isFlipped ? 1 : -1;
@@ -114,7 +116,7 @@ public class EnemyMovement : MonoBehaviour
                 {
                     room = roomTransition.toRoom,
                     parent = q,
-                    fromTransitionLocation = roomTransition.interactableGameObject.transform.position,
+                    fromTransitionLocation = roomTransition.interactableGameObject.GetComponent<Collider2D>().bounds.center,
                 };
                 if (successor.room == targetRoom)
                 {
@@ -162,6 +164,10 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.DrawLine(new Vector2(this.targetLocation.x -.2f, this.targetLocation.y -.2f), new Vector2(this.targetLocation.x + .2f, this.targetLocation.y + .2f), Color
+            .green);
+        Debug.DrawLine(new Vector2(this.targetLocation.x - .2f , this.targetLocation.y + .2f), new Vector2(this.targetLocation.x + .2f, this.targetLocation.y - .2f), Color
+            .green);
         float speed;
         if (pd.alertState == PlayerDetection.AlertState.Idle)
         {
@@ -172,9 +178,9 @@ public class EnemyMovement : MonoBehaviour
             speed = enemySpeed * 2;
         }
 
-        Vector2 tmpLocation = new(targetLocation.x, targetLocation.y + 0.5f);
+        Vector2 targetLocation = new(this.targetLocation.x, this.targetLocation.y + 0.5f);
         //Debug.Log(tmpLocation);
-        if (coll.bounds.Contains(tmpLocation))
+        if (coll.bounds.Contains(targetLocation))
         {
             //enemyAI.FlipX = originalFlip ?? false;
             atTargetLocation = true;
@@ -192,17 +198,40 @@ public class EnemyMovement : MonoBehaviour
         Room currentRoom = rooms.Find((room) => room.coll.bounds.Contains(currentPos));
         // Get the c the target location is in
         //Debug.Log(transform.position + " : " + tmpLocation);
-        Room targetRoom = rooms.Find((room) => room.coll.bounds.Contains(tmpLocation));
+        Room targetRoom = rooms.Find((room) => room.coll.bounds.Contains(targetLocation));
 
-        if (currentRoom == targetRoom || currentRoom == null || targetRoom == null)
+        if (currentRoom == targetRoom || targetRoom == null)
         {
-            TraverseOwnRoom(speed);
+            TraverseOwnRoom(speed, targetLocation);
+            return;
+        }
+
+        if (currentRoom == null)
+        {
             return;
         }
 
         RoomNode path = CalcPathUsingAStar(currentRoom, targetRoom);
-        Debug.Log(path);
-
+        List<RoomNode> nodes = new();
+        while (path != null)
+        {
+            nodes.Add(path);
+            if (path.parent == null) break;
+            path = path.parent;
+        }
+        nodes.Reverse();
+        //Remove the first node as there is no transition to go to
+        nodes.RemoveAt(0);
+        TraverseOwnRoom(speed, nodes[0].fromTransitionLocation);
+        RaycastHit2D hit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, Vector2.right, 1f, interactableMask);
+        if (hit.collider && hit.collider.bounds.Contains(nodes[0].fromTransitionLocation))
+        {
+            Interactable interactable = hit.collider.GetComponent<Interactable>();
+            if (interactable.IsInteractable)
+            {
+                interactable.Interact(gameObject);
+            }
+        }
         atTargetLocation = false;
     }
 }
