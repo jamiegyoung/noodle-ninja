@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -19,17 +20,15 @@ public class EnemyGenerator : MonoBehaviour
     public ScoreController scoreController;
     public Transform playerTransform;
     public PlayerHealth playerHealth;
-    private GameObject[] enemyGameObjects;
-    //private ActionState[] enemyPlayerVision;
-    // Start is called before the first frame update
+    private List<GameObject> enemyGameObjects = new List<GameObject>();
+
     void Start()
     {
-        enemyGameObjects = new GameObject[enemies.Length];
+        Debug.Log("Creating " + enemies.Length + " enemies");
         for (int i = 0; i < enemies.Length; i++)
         {
             Enemy enemy = enemies[i];
-            //GameObject duplicate = enemyTemplate;
-            GameObject duplicate = Instantiate(enemyTemplate);
+            GameObject duplicate = enemyTemplate;
             duplicate.GetComponent<Transform>().position = enemy.spawnLocation;
             EnemyAI enemyAI = duplicate.GetComponent<EnemyAI>();
             enemyAI.enemyMask = enemyMask;
@@ -41,7 +40,7 @@ public class EnemyGenerator : MonoBehaviour
             playerDetection.playerTransform = playerTransform;
             EnemyMovement enemyMovement = duplicate.GetComponentInChildren<EnemyMovement>();
             enemyMovement.targetLocation = enemy.targetLocation;
-            enemyGameObjects[i] = duplicate;
+            enemyGameObjects.Add(Instantiate(duplicate));
         }
     }
 
@@ -52,17 +51,15 @@ public class EnemyGenerator : MonoBehaviour
     /// <returns>Whether the player is currently in vision and being attacked by</returns>
     public bool playerIsSeenAndBeingAttacked()
     {
-        for (int i = 0; i < enemyGameObjects.Length; i++)
+        for (int i = 0; i < enemyGameObjects.Count; i++)
         {
             GameObject enemyGameObject = enemyGameObjects[i];
             PlayerDetection playerDetection = enemyGameObject.GetComponentInChildren<PlayerDetection>();
             if (playerDetection.hasVisionOfPlayer && playerDetection.alertState == PlayerDetection.AlertState.Attacking)
             {
-                Debug.Log("Player found on interaction check");
                 return true;
             }
         }
-        Debug.Log("Player not found on interaction check");
         return false;
     }
 }
