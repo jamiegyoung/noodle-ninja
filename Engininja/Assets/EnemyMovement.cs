@@ -19,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
     public float timeUntilContinueAfterSeen = 3f;
     public GameObject roomsContainer;
     private List<Room> rooms;
+    private const float HEURISTICS_WEIGHT = .5f;
 
 
     private void Start()
@@ -87,8 +88,8 @@ public class EnemyMovement : MonoBehaviour
     {
         static float CalcHeuristic(Room c, Room t)
         {
-            Vector2 posDiff = t.transform.position - c.transform.position;
-            return Mathf.Abs(posDiff.x) + Mathf.Abs(posDiff.y);
+            Vector2 posDiff = t.coll.bounds.center - c.coll.bounds.center;
+            return (Mathf.Abs(posDiff.x) + Mathf.Abs(posDiff.y)) * HEURISTICS_WEIGHT;
         }
 
         List<RoomNode> openList = new();
