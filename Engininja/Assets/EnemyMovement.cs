@@ -19,6 +19,7 @@ public class EnemyMovement : MonoBehaviour
     public GameObject roomsContainer;
     private List<Room> rooms;
 
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -52,7 +53,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
         Vector2 tmpLocation = new(targetLocation.x, targetLocation.y + 0.5f);
-        Debug.Log(tmpLocation);
+        //Debug.Log(tmpLocation);
         if (coll.bounds.Contains(tmpLocation))
         {
             //enemyAI.FlipX = originalFlip ?? false;
@@ -67,11 +68,19 @@ public class EnemyMovement : MonoBehaviour
         }
 
         // Get the current enemy room
-        Room currentRoom = rooms.Find((room) => room.GetComponent<Collider2D>().bounds.Contains(transform.position));
+        Vector2 currentPos = new Vector2(transform.position.x, transform.position.y);
+        Room currentRoom = rooms.Find((room) => room.coll.bounds.Contains(currentPos));
         // Get the c the target location is in
-        Room targetRoom = rooms.Find((room) => room.GetComponent<Collider2D>().bounds.Contains(tmpLocation));
-        Debug.Log(currentRoom, targetRoom);
-        TraverseOwnRoom(speed);
+        //Debug.Log(transform.position + " : " + tmpLocation);
+        Room targetRoom = rooms.Find((room) => room.coll.bounds.Contains(tmpLocation));
+
+        if (currentRoom == targetRoom || currentRoom == null || targetRoom == null)
+        {
+            TraverseOwnRoom(speed);
+            return;
+        }
+
+
         atTargetLocation = false;
     }
 }

@@ -1010,7 +1010,7 @@ MonoBehaviour:
   enemySpeed: 2
   timeToMaxVelocity: 0.05
   timeUntilContinueAfterSeen: 3
-  roomsContainer: {fileID: 5313246419141261761, guid: bd51758e6016dd24ba417a674b003ce4, type: 3}
+  roomsContainer: {fileID: 0}
 --- !u!1 &7263058657799487281
 GameObject:
   m_ObjectHideFlags: 0

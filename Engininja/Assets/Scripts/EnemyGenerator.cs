@@ -21,9 +21,12 @@ public class EnemyGenerator : MonoBehaviour
     public Transform playerTransform;
     public PlayerHealth playerHealth;
     private List<GameObject> enemyGameObjects = new List<GameObject>();
+    public GameObject roomsContainer;
 
     void Start()
     {
+
+
         Debug.Log("Creating " + enemies.Length + " enemies");
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -40,6 +43,7 @@ public class EnemyGenerator : MonoBehaviour
             playerDetection.playerTransform = playerTransform;
             EnemyMovement enemyMovement = duplicate.GetComponentInChildren<EnemyMovement>();
             enemyMovement.targetLocation = enemy.targetLocation;
+            enemyMovement.roomsContainer = roomsContainer;
             enemyGameObjects.Add(Instantiate(duplicate));
         }
     }

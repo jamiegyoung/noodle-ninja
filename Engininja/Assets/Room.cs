@@ -12,5 +12,11 @@ public struct RoomTransitions
 [System.Serializable]
 public class Room : MonoBehaviour
 {
+    public Collider2D coll;
     public RoomTransitions[] roomTransitions;
+
+    private void Start()
+    {
+        coll = GetComponent<Collider2D>();
+    }
 }
