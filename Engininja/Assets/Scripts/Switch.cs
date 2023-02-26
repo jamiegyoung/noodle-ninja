@@ -14,6 +14,16 @@ public class Switch : MonoBehaviour, Interactable
     private Light2D[] _ceilingLights;
     private AudioSource audioSource;
 
+    private IEnumerator ToggleLights()
+    {
+
+        foreach (Light2D light in _ceilingLights)
+        {
+            light.intensity = isOn ? 0.9f : 0f;
+            yield return new WaitForSeconds(0.02f);
+        }
+    }
+
     public void Interact(GameObject interactor)
     {
         isOn = !isOn;
@@ -25,10 +35,7 @@ public class Switch : MonoBehaviour, Interactable
         }
         anim.SetBool("switchIsOn", isOn);
 
-        foreach (Light2D light in _ceilingLights)
-        {
-            light.intensity = isOn ? 0.9f : 0f;
-        }
+        StartCoroutine(ToggleLights());
         audioSource.Play();
     }
 

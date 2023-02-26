@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour, Interactable
 {
     //public Transform playerTransform;
-    //private float lastFlipped;
+    private float lastFlipped;
     private bool _isDead = false;
     private BoxCollider2D coll;
     private bool scoreDetectionFlag = false;
@@ -40,7 +40,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         }
         set
         {
-            //lastFlipped = Time.time;
+            lastFlipped = Time.time;
             //rotationValue = (rotationValue + 180) % 360;
             Debug.Log("Setting Flip to " + value);
             //transform.rotation = Quaternion.Euler(0, rotationValue, 0);
@@ -57,8 +57,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         enemyMovement = GetComponent<EnemyMovement>();
         if (idleFlip)
         {
-            //lastFlipped = Time.time;
-
+            lastFlipped = Time.time;
         }
         coll = GetComponent<BoxCollider2D>();
     }
@@ -73,7 +72,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         {
             case AlertState.Idle:
                 scoreDetectionFlag = false;
-                //IdleBehaviour();
+                IdleBehaviour();
                 break;
             case AlertState.Aware:
                 scoreDetectionFlag = false;
@@ -90,18 +89,13 @@ public class EnemyAI : MonoBehaviour, Interactable
         }
     }
 
-    //private void IdleBehaviour()
-    //{
-    //    if (idleFlip && lastFlipped - Time.time < -5f)
-    //    {
-    //        //FlipX();
-    //    }
-    //}
-
-    //private void FlipX()
-    //{
-    //    flipX = !flipX;
-    //}
+    private void IdleBehaviour()
+    {
+        if (idleFlip && lastFlipped - Time.time < -5f)
+        {
+            FlipX = !FlipX;
+        }
+    }
 
     private void UpdateOtherEnemies()
     {

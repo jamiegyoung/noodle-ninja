@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -15,7 +16,8 @@ public class EnemyMovement : MonoBehaviour
     private float currentXVelocity = 0f;
     public float timeToMaxVelocity = 0.1f;
     public float timeUntilContinueAfterSeen = 3f;
-    private bool? originalFlip;
+    public GameObject roomsContainer;
+    private List<Room> rooms;
 
     private void Start()
     {
@@ -23,6 +25,17 @@ public class EnemyMovement : MonoBehaviour
         coll = GetComponent<Collider2D>();
         enemyAI = GetComponent<EnemyAI>();
         pd = GetComponentInChildren<PlayerDetection>();
+        rooms = roomsContainer.GetComponentsInChildren<Room>().ToList();
+    }
+
+    void TraverseOwnRoom(float speed)
+    {
+        bool isFlipped = transform.position.x > targetLocation.x;
+        //Debug.Log("setting flip due to movement to " + isFlipped);
+        enemyAI.FlipX = isFlipped;
+        float directionMultiplier = isFlipped ? 1 : -1;
+        float smoothXVel = Mathf.SmoothDamp(rb.velocity.x, speed * directionMultiplier * -1, ref currentXVelocity, timeToMaxVelocity);
+        rb.velocity = new Vector2(smoothXVel, rb.velocity.y);
     }
 
     // Update is called once per frame
@@ -39,25 +52,26 @@ public class EnemyMovement : MonoBehaviour
         }
 
         Vector2 tmpLocation = new(targetLocation.x, targetLocation.y + 0.5f);
+        Debug.Log(tmpLocation);
         if (coll.bounds.Contains(tmpLocation))
         {
-            enemyAI.FlipX = originalFlip ?? false;
+            //enemyAI.FlipX = originalFlip ?? false;
             atTargetLocation = true;
             return;
         }
 
+        // Wait a second to move after last seeing the player
         if (pd.timeSinceLastSeenPlayer - Time.time > timeUntilContinueAfterSeen * -1)
         {
             return;
         }
 
-        originalFlip ??= enemyAI.FlipX;
+        // Get the current enemy room
+        Room currentRoom = rooms.Find((room) => room.GetComponent<Collider2D>().bounds.Contains(transform.position));
+        // Get the c the target location is in
+        Room targetRoom = rooms.Find((room) => room.GetComponent<Collider2D>().bounds.Contains(tmpLocation));
+        Debug.Log(currentRoom, targetRoom);
+        TraverseOwnRoom(speed);
         atTargetLocation = false;
-        bool isFlipped = transform.position.x > targetLocation.x;
-        //Debug.Log("setting flip due to movement to " + isFlipped);
-        enemyAI.FlipX = isFlipped;
-        float directionMultiplier = isFlipped ? 1 : -1;
-        float smoothXVel = Mathf.SmoothDamp(rb.velocity.x, speed * directionMultiplier * -1, ref currentXVelocity, timeToMaxVelocity);
-        rb.velocity = new Vector2(smoothXVel, rb.velocity.y);
     }
 }
