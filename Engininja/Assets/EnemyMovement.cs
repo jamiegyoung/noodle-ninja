@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,113 @@ public class EnemyMovement : MonoBehaviour
         rb.velocity = new Vector2(smoothXVel, rb.velocity.y);
     }
 
+    class RoomNode
+    {
+        public Room room;
+        private float f = 0;
+        private float h = 0;
+        private float g = 0;
+        public RoomNode parent;
+
+        public void SetG(float value)
+        {
+            g = value;
+            f = h + g;
+        }
+
+        public float GetG() { return g; }
+
+        public void SetH(float value)
+        {
+            h = value;
+            f = h + g;
+        }
+
+        public float GetF() { return f; }
+    }
+
+    RoomNode FindMinFRoomNodeInList(List<RoomNode> list)
+    {
+        if (list.Count == 0) return null;
+        RoomNode minRoom = list[0];
+        float minF = list[0].GetF();
+        foreach (RoomNode room in list)
+        {
+            float roomF = room.GetF();
+            if (roomF < minF)
+            {
+                minRoom = room;
+                minF = roomF;
+            }
+        }
+        return minRoom;
+    }
+
+    RoomNode CalcPathUsingAStar(Room currentRoom, Room targetRoom)
+    {
+        static float CalcHeuristic(Room c, Room t)
+        {
+            Vector2 posDiff = t.transform.position - c.transform.position;
+            return Mathf.Abs(posDiff.x) + Mathf.Abs(posDiff.y);
+        }
+
+        List<RoomNode> openList = new();
+        List<RoomNode> closedList = new();
+        RoomNode startingNode = new()
+        {
+            room = currentRoom
+        };
+        openList.Add(startingNode);
+
+        while (openList.Count > 0)
+        {
+
+            RoomNode q = FindMinFRoomNodeInList(openList);
+            openList.Remove(q);
+            RoomTransition[] qTransitions = q.room.roomTransitions;
+            for (int i = 0; i < qTransitions.Length; i++)
+            {
+                RoomTransition roomTransition = qTransitions[i];
+                RoomNode successor = new()
+                {
+                    room = roomTransition.toRoom,
+                    parent = q
+                };
+                if (successor.room == targetRoom)
+                {
+                    return successor;
+                }
+                // Cost to get to parent + cost to get to this node
+                successor.SetG(q.GetG() + roomTransition.cost);
+                successor.SetH(CalcHeuristic(currentRoom, successor.room));
+                // Check if a node with the same pos has a lower f, if so ignore this one
+                int sameOpenlistNodeIndex = openList.FindIndex(c => c.room.coll.bounds.center == successor.room.coll.bounds.center);
+                if (sameOpenlistNodeIndex != -1)
+                {
+                    // location has been found before
+                    if (openList[sameOpenlistNodeIndex].GetF() < successor.GetF())
+                    {
+                        // Open list is better, ignore this one
+                        continue;
+                    }
+                }
+                int sameClosedListNodeIndex = closedList.FindIndex(c => c.room.coll.bounds.center == successor.room.coll.bounds.center);
+                if (sameClosedListNodeIndex != -1)
+                {
+                    // location has been found before
+                    if (closedList[sameClosedListNodeIndex].GetF() < successor.GetF())
+                    {
+                        // Open list is better, ignore this one
+                        continue;
+                    }
+                }
+                openList.Add(successor);
+            }
+            closedList.Add(q);
+        }
+        return null;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -68,7 +176,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
         // Get the current enemy room
-        Vector2 currentPos = new Vector2(transform.position.x, transform.position.y);
+        Vector2 currentPos = new(transform.position.x, transform.position.y);
         Room currentRoom = rooms.Find((room) => room.coll.bounds.Contains(currentPos));
         // Get the c the target location is in
         //Debug.Log(transform.position + " : " + tmpLocation);
@@ -80,6 +188,8 @@ public class EnemyMovement : MonoBehaviour
             return;
         }
 
+        RoomNode path = CalcPathUsingAStar(currentRoom, targetRoom);
+        Debug.Log(path);
 
         atTargetLocation = false;
     }
