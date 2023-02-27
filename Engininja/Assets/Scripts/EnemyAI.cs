@@ -95,7 +95,7 @@ public class EnemyAI : MonoBehaviour, Interactable
     private void IdleBehaviour()
     {
 
-        if (idleFlip && lastFlipped - Time.time < -5f)
+        if (lastFlipped - Time.time < -5f)
         {
             if (patrolLocations.Count > 0)
             {

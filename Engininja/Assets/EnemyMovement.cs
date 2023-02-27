@@ -183,7 +183,7 @@ public class EnemyMovement : MonoBehaviour
         //Debug.Log(tmpLocation);
         if (coll.bounds.Contains(targetLocation))
         {
-            if (atLocationFlipFlag == false)
+            if (atLocationFlipFlag == false && this.patrolLocation.flipAtLocation)
             {
                 atLocationFlipFlag = true;
                 enemyAI.FlipX = !enemyAI.FlipX;

@@ -14,7 +14,6 @@ public struct Enemy
     public Vector2 spawnLocation;
     public bool flipX;
     public float waitTime;
-    public bool idleFlip;
     public List<PatrolLocation> patrolLocations;
 }
 
@@ -43,7 +42,6 @@ public class EnemyGenerator : MonoBehaviour
             EnemyAI enemyAI = duplicate.GetComponent<EnemyAI>();
             enemyAI.enemyMask = enemyMask;
             enemyAI.scoreController = scoreController;
-            enemyAI.idleFlip = enemy.idleFlip;
             enemyAI.FlipX = enemy.flipX;
             enemyAI.patrolLocations = enemy.patrolLocations;
             PlayerDetection playerDetection = duplicate.GetComponentInChildren<PlayerDetection>();
