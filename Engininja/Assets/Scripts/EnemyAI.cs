@@ -45,7 +45,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         {
             lastFlipped = Time.time;
             //rotationValue = (rotationValue + 180) % 360;
-            Debug.Log("Setting Flip to " + value);
+            //Debug.Log("Setting Flip to " + value);
             //transform.rotation = Quaternion.Euler(0, rotationValue, 0);
             transform.localScale = new Vector3(value ? -1 : 1, transform.localScale.y, transform.localScale.z);
             _flipX = value;
