@@ -234,10 +234,10 @@ public class EnemyMovement : MonoBehaviour
         if (hit.collider && hit.collider.bounds.Contains(nodes[0].fromTransitionLocation))
         {
             Interactable interactable = hit.collider.GetComponent<Interactable>();
-            if (interactable.IsInteractable)
-            {
-                interactable.Interact(gameObject);
-            }
+            //if (interactable.IsInteractable)
+            //{
+            interactable.Interact(gameObject);
+            //}
         }
         atTargetLocation = false;
     }

@@ -747,8 +747,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5539291632111803523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 18, y: 1, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3375159196697538599}
@@ -832,10 +832,12 @@ MonoBehaviour:
     m_Bits: 6152
   idleFlip: 0
   patrolLocations:
-  - location: {x: 30, y: -3}
+  - location: {x: 40, y: 1}
     flipAtLocation: 1
-  - location: {x: 23, y: -3}
-    flipAtLocation: 1
+  - location: {x: 30, y: 5}
+    flipAtLocation: 0
+  - location: {x: 18, y: 1}
+    flipAtLocation: 0
 --- !u!61 &1121753566205750639
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1010,7 +1012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolLocation:
-    location: {x: 30, y: -3}
+    location: {x: 40, y: 1}
     flipAtLocation: 1
   atTargetLocation: 0
   enemyAI: {fileID: 6731460616421594073}
