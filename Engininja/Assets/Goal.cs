@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.Playables;
 using UnityEngine.Rendering;
 
@@ -13,6 +14,7 @@ public class Goal : MonoBehaviour
     void Start()
     {
         dir = GetComponent<PlayableDirector>();
+        dir.time = 0;
     }
 
     private void FixedUpdate()

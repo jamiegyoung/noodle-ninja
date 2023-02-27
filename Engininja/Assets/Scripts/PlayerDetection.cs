@@ -160,7 +160,7 @@ public class PlayerDetection : MonoBehaviour
         if (alertCounter <= MIN_ALERT)
         {
             //Debug.Log(Time.time - lastAlertTime);
-            if (Time.time - lastAlertTime > 30f && alertState != AlertState.Idle)
+            if (Time.time - lastAlertTime > 12f && alertState != AlertState.Idle)
             {
                 alertCounter = MAX_ALERT;
                 alertState = alertState.Previous();
