@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 [System.Serializable]
 public struct PatrolLocation
@@ -28,11 +30,11 @@ public class EnemyGenerator : MonoBehaviour
     private List<GameObject> enemyGameObjects = new();
     public GameObject roomsContainer;
     public LayerMask interactableMask;
+    public Switch lightSwitch;
+    private Light2D[] enemyLights;
 
     void Start()
     {
-
-
         Debug.Log("Creating " + enemies.Length + " enemies");
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -51,7 +53,18 @@ public class EnemyGenerator : MonoBehaviour
             enemyMovement.patrolLocation = enemy.patrolLocations[0];
             enemyMovement.roomsContainer = roomsContainer;
             enemyMovement.interactableMask = interactableMask;
-            enemyGameObjects.Add(Instantiate(duplicate));
+            enemyGameObjects.Add(Instantiate(duplicate, gameObject.transform));
+        }
+        enemyLights = gameObject.GetComponentsInChildren<Light2D>();
+    }
+
+    public IEnumerator SwitchEnemyLights()
+    {
+        yield return new WaitForSeconds(1f);
+        foreach (Light2D light in enemyLights)
+        {
+            light.intensity = light.intensity == 0f ? 1.5f : 0f;
+            yield return new WaitForSeconds(0.02f);
         }
     }
 

@@ -19,7 +19,7 @@ public class EnemyAttack : MonoBehaviour
     private void Update()
     {
         Vector2 offset = new Vector3(0, 0, transform.rotation.eulerAngles.z);
-        Debug.DrawRay(coll.bounds.center, offset, Color.red);
+        //Debug.DrawRay(coll.bounds.center, offset, Color.red);
     }
 
     // Update is called once per frame

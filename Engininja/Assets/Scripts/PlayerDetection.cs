@@ -227,7 +227,7 @@ public class PlayerDetection : MonoBehaviour
             if (raycastHit.collider && raycastHit.collider.gameObject.name == "Player")
             {
                 hasVisionOfPlayer = true;
-                Debug.DrawRay(origin, angle, Color.red);
+                //Debug.DrawRay(origin, angle, Color.red);
                 Vector3 targetPos = raycastHit.collider.gameObject.transform.position;
                 Quaternion target = Quaternion.LookRotation(
                     new Vector3(targetPos.x, targetPos.y + .5f, 0) - transform.position, transform.TransformDirection(Vector3.up)
@@ -238,7 +238,7 @@ public class PlayerDetection : MonoBehaviour
             }
             else
             {
-                Debug.DrawRay(origin, angle);
+                //Debug.DrawRay(origin, angle);
             }
         }
         if (hasVisionOfPlayer == false)

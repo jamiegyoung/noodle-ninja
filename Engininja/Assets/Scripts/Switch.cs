@@ -11,12 +11,13 @@ public class Switch : MonoBehaviour, Interactable
     public bool IsInteractable => true;
     public Doors doors;
     public GameObject ceilingLights;
+    public List<Light2D> enemyLights = new();
     private Light2D[] _ceilingLights;
     private AudioSource audioSource;
+    public EnemyGenerator enemyGenerator;
 
     private IEnumerator ToggleLights()
     {
-
         foreach (Light2D light in _ceilingLights)
         {
             light.intensity = isOn ? 0.9f : 0f;
@@ -36,6 +37,7 @@ public class Switch : MonoBehaviour, Interactable
         anim.SetBool("switchIsOn", isOn);
 
         StartCoroutine(ToggleLights());
+        StartCoroutine(enemyGenerator.SwitchEnemyLights());
         audioSource.Play();
     }
 
