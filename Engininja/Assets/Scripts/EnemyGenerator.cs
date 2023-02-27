@@ -2,14 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public struct PatrolLocation
+{
+    public Vector2 location;
+    public bool flipAtLocation;
+}
+
+[System.Serializable]
 public struct Enemy
 {
     public Vector2 spawnLocation;
-    public Vector2 patrolDestination;
     public bool flipX;
     public float waitTime;
     public bool idleFlip;
-    public Vector2 targetLocation;
+    public List<PatrolLocation> patrolLocations;
 }
 
 public class EnemyGenerator : MonoBehaviour
@@ -20,7 +26,7 @@ public class EnemyGenerator : MonoBehaviour
     public ScoreController scoreController;
     public Transform playerTransform;
     public PlayerHealth playerHealth;
-    private List<GameObject> enemyGameObjects = new List<GameObject>();
+    private List<GameObject> enemyGameObjects = new();
     public GameObject roomsContainer;
     public LayerMask interactableMask;
 
@@ -39,11 +45,12 @@ public class EnemyGenerator : MonoBehaviour
             enemyAI.scoreController = scoreController;
             enemyAI.idleFlip = enemy.idleFlip;
             enemyAI.FlipX = enemy.flipX;
+            enemyAI.patrolLocations = enemy.patrolLocations;
             PlayerDetection playerDetection = duplicate.GetComponentInChildren<PlayerDetection>();
             playerDetection.playerHealth = playerHealth;
             playerDetection.playerTransform = playerTransform;
             EnemyMovement enemyMovement = duplicate.GetComponentInChildren<EnemyMovement>();
-            enemyMovement.targetLocation = enemy.targetLocation;
+            enemyMovement.patrolLocation = enemy.patrolLocations[0];
             enemyMovement.roomsContainer = roomsContainer;
             enemyMovement.interactableMask = interactableMask;
             enemyGameObjects.Add(Instantiate(duplicate));

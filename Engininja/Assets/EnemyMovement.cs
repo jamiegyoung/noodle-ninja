@@ -8,7 +8,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
 
-    public Vector2 targetLocation;
+    public PatrolLocation patrolLocation;
     public bool atTargetLocation = false;
     private Collider2D coll;
     private Rigidbody2D rb;
@@ -22,6 +22,7 @@ public class EnemyMovement : MonoBehaviour
     private List<Room> rooms;
     public LayerMask interactableMask;
     private const float HEURISTICS_WEIGHT = .5f;
+    private bool atLocationFlipFlag = false;
 
 
     private void Start()
@@ -164,9 +165,9 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.DrawLine(new Vector2(this.targetLocation.x -.2f, this.targetLocation.y -.2f), new Vector2(this.targetLocation.x + .2f, this.targetLocation.y + .2f), Color
+        Debug.DrawLine(new Vector2(this.patrolLocation.location.x - .2f, this.patrolLocation.location.y - .2f), new Vector2(this.patrolLocation.location.x + .2f, this.patrolLocation.location.y + .2f), Color
             .green);
-        Debug.DrawLine(new Vector2(this.targetLocation.x - .2f , this.targetLocation.y + .2f), new Vector2(this.targetLocation.x + .2f, this.targetLocation.y - .2f), Color
+        Debug.DrawLine(new Vector2(this.patrolLocation.location.x - .2f, this.patrolLocation.location.y + .2f), new Vector2(this.patrolLocation.location.x + .2f, this.patrolLocation.location.y - .2f), Color
             .green);
         float speed;
         if (pd.alertState == PlayerDetection.AlertState.Idle)
@@ -178,14 +179,20 @@ public class EnemyMovement : MonoBehaviour
             speed = enemySpeed * 2;
         }
 
-        Vector2 targetLocation = new(this.targetLocation.x, this.targetLocation.y + 0.5f);
+        Vector2 targetLocation = new(this.patrolLocation.location.x, this.patrolLocation.location.y + 0.5f);
         //Debug.Log(tmpLocation);
         if (coll.bounds.Contains(targetLocation))
         {
-            //enemyAI.FlipX = originalFlip ?? false;
+            if (atLocationFlipFlag == false)
+            {
+                atLocationFlipFlag = true;
+                enemyAI.FlipX = !enemyAI.FlipX;
+
+            }
             atTargetLocation = true;
             return;
         }
+        atLocationFlipFlag = false;
 
         // Wait a second to move after last seeing the player
         if (pd.timeSinceLastSeenPlayer - Time.time > timeUntilContinueAfterSeen * -1)

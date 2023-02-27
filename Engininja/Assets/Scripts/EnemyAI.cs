@@ -5,6 +5,7 @@ using UnityEditor.Experimental.GraphView;
 using static ScoreController;
 using static UnityEngine.Rendering.DebugUI;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 public class EnemyAI : MonoBehaviour, Interactable
 {
@@ -22,7 +23,9 @@ public class EnemyAI : MonoBehaviour, Interactable
     public SpriteRenderer alertSpriteRenderer;
     public LayerMask obstacleMask;
     public bool idleFlip;
+    public List<PatrolLocation> patrolLocations;
     private bool _flipX;
+    private int patrolLocationCounter = 0;
     public bool IsDead
     {
         get
@@ -91,9 +94,26 @@ public class EnemyAI : MonoBehaviour, Interactable
 
     private void IdleBehaviour()
     {
+
         if (idleFlip && lastFlipped - Time.time < -5f)
         {
-            FlipX = !FlipX;
+            if (patrolLocations.Count > 0)
+            {
+                patrolLocationCounter++;
+                if (patrolLocationCounter < patrolLocations.Count)
+                {
+                    enemyMovement.patrolLocation = patrolLocations[patrolLocationCounter];
+                }
+                else
+                {
+                    enemyMovement.patrolLocation = patrolLocations[0];
+                    patrolLocationCounter = 0;
+                }
+            }
+            else
+            {
+                FlipX = !FlipX;
+            }
         }
     }
 
