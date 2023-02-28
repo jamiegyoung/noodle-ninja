@@ -26,6 +26,7 @@ public class EnemyAI : MonoBehaviour, Interactable
     public List<PatrolLocation> patrolLocations;
     private bool _flipX;
     private int patrolLocationCounter = 0;
+    private Animator anim;
 
     public bool FlipX
     {
@@ -46,6 +47,7 @@ public class EnemyAI : MonoBehaviour, Interactable
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         //_flipX = flipX;
         enemyMovement = GetComponent<EnemyMovement>();
         if (idleFlip)
@@ -168,15 +170,16 @@ public class EnemyAI : MonoBehaviour, Interactable
 
     public void Interact(GameObject interactor)
     {
-        deathAudio.pitch = Random.Range(0.85f, 1.15f);
-        deathAudio.Play();
         if (isDead == true)
         {
             return;
         }
+        deathAudio.pitch = Random.Range(0.85f, 1.15f);
+        deathAudio.Play();
+        anim.SetBool("isDead", true);
         isDead = true;
         scoreController.AddScore(ScoreConditions.Kill);
         gameObject.layer = 9;
-        transform.rotation = Quaternion.Euler(0, 0, 90);
+        //transform.rotation = Quaternion.Euler(0, 0, 90);
     }
 }

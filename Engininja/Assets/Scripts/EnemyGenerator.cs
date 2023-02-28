@@ -77,12 +77,12 @@ public class EnemyGenerator : MonoBehaviour
                     targetFlag = true;
                 }
             }
-            if (targetFlag)
+            if (targetFlag && playerDetection != null)
             {
                 playerDetection.lastSeenPlayerLocation = target;
+                playerDetection.alertCounter = PlayerDetection.MAX_ALERT;
+                playerDetection.alertState = PlayerDetection.AlertState.Aware;
             }
-            playerDetection.alertCounter = PlayerDetection.MAX_ALERT;
-            playerDetection.alertState = PlayerDetection.AlertState.Aware;
         }
     }
 

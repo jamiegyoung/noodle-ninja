@@ -167,6 +167,7 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (enemyAI.isDead) return;
         Debug.DrawLine(new Vector2(this.patrolLocation.location.x - .2f, this.patrolLocation.location.y - .2f), new Vector2(this.patrolLocation.location.x + .2f, this.patrolLocation.location.y + .2f), Color
             .green);
         Debug.DrawLine(new Vector2(this.patrolLocation.location.x - .2f, this.patrolLocation.location.y + .2f), new Vector2(this.patrolLocation.location.x + .2f, this.patrolLocation.location.y - .2f), Color

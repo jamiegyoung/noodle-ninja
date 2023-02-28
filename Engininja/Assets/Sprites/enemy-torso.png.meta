@@ -713,7 +713,7 @@ TextureImporter:
         serializedVersion: 2
         x: 432
         y: 0
-        width: 32
+        width: 16
         height: 5
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -724,6 +724,27 @@ TextureImporter:
       bones: []
       spriteID: 855f28f6453ddfb4d9075754cd960e09
       internalID: -2072969615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy-torso_28
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 16
+        height: 5
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43f2d91610660bb4db7fe4e8ea37a198
+      internalID: -1624802814
       vertices: []
       indices: 
       edges: []
@@ -740,6 +761,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       enemy-torso_19: -1976437579
+      enemy-torso_28: -1624802814
       enemy-torso_18: -951561832
       enemy-torso_9: 495327980
       enemy-torso_6: -1239434762
