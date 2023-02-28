@@ -8,6 +8,7 @@ public class PlayerInteract : MonoBehaviour
 
     public LayerMask interactableMask;
     public LayerMask enemyMask;
+    public LayerMask blockingMask;
     private SpriteRenderer sprite;
     private BoxCollider2D coll;
     private InputHandler inputHandler;
@@ -27,19 +28,21 @@ public class PlayerInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, GetDirectionVector(), 1f, interactableMask + enemyMask);
+        RaycastHit2D hit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, GetDirectionVector(), 1f, interactableMask + enemyMask + blockingMask);
         if (hit.collider == null)
         {
             interactionInformer.Hide();
             return;
         }
-        Vector3 hitPos = hit.collider.transform.position;
-        if (hit.collider != null)
-        {
-            //Debug.Log("Interaction Possible with layer");
-        }
-        Interactable interactable = hit.collider.GetComponent<Interactable>();
 
+        Vector3 hitPos = hit.collider.transform.position;
+        // Hit blocking, not interactable
+        Interactable interactable = hit.collider.GetComponent<Interactable>();
+        if (interactable == null)
+        {
+            interactionInformer.Hide();
+            return;
+        }
         Vector2 interactionInformerPos = new(hitPos.x, hitPos.y + hit.collider.bounds.size.y + 0.3f);
         if (interactable.IsInteractable)
         {

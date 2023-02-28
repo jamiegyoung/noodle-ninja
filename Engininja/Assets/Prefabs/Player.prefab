@@ -792,6 +792,9 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 1024
+  blockingMask:
+    serializedVersion: 2
+    m_Bits: 4104
 --- !u!114 &6938851253113418160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,7 +838,7 @@ MonoBehaviour:
   - {x: 0.049621582, y: 0.0382843, z: 0}
   m_ShapePathHash: -2056489707
   m_Mesh: {fileID: 0}
-  m_InstanceId: 70820
+  m_InstanceId: 58192
 --- !u!1 &7097862943005776217
 GameObject:
   m_ObjectHideFlags: 0
