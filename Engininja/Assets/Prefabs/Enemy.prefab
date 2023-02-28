@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3375159196048628488}
   - component: {fileID: 3375159196048628495}
   m_Layer: 2
-  m_Name: Light 2D
+  m_Name: w
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3375159196048628489}
   m_LocalRotation: {x: 0, y: 0, z: -0.6883546, w: 0.72537434}
-  m_LocalPosition: {x: 0, y: 0.78, z: 0}
+  m_LocalPosition: {x: 0.015, y: 0.498, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -139,7 +139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3375159196697538600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0.06, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -236,6 +236,7 @@ MonoBehaviour:
   attackingSprite: {fileID: 21300000, guid: 0c8a083270e849f4fbaa794265bb099b, type: 3}
   alertStateSprite: {fileID: 7493620563702229856}
   generator: {fileID: 0}
+  parentAnimator: {fileID: 8028358082827132223}
   alertCounter: 0
   timeSinceLastSeenPlayer: 0
   lastSeenPlayerLocation: {x: 0, y: 0, z: 0}
@@ -255,8 +256,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.3125, y: 0.9375}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

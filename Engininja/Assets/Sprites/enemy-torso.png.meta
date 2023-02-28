@@ -144,12 +144,12 @@ TextureImporter:
       name: enemy-torso_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 7
-        width: 5
-        height: 15
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -165,12 +165,12 @@ TextureImporter:
       name: enemy-torso_1
       rect:
         serializedVersion: 2
-        x: 21
-        y: 6
-        width: 5
-        height: 15
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 16
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -186,12 +186,12 @@ TextureImporter:
       name: enemy-torso_2
       rect:
         serializedVersion: 2
-        x: 37
-        y: 8
-        width: 5
-        height: 14
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 32
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -207,12 +207,12 @@ TextureImporter:
       name: enemy-torso_3
       rect:
         serializedVersion: 2
-        x: 53
-        y: 7
-        width: 5
-        height: 14
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 48
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -228,12 +228,12 @@ TextureImporter:
       name: enemy-torso_4
       rect:
         serializedVersion: 2
-        x: 69
-        y: 7
-        width: 5
-        height: 15
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 64
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -249,12 +249,12 @@ TextureImporter:
       name: enemy-torso_5
       rect:
         serializedVersion: 2
-        x: 83
-        y: 7
-        width: 8
-        height: 14
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 80
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -270,12 +270,12 @@ TextureImporter:
       name: enemy-torso_6
       rect:
         serializedVersion: 2
-        x: 101
-        y: 7
-        width: 5
-        height: 15
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 96
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -291,12 +291,12 @@ TextureImporter:
       name: enemy-torso_7
       rect:
         serializedVersion: 2
-        x: 115
-        y: 7
-        width: 8
-        height: 14
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 112
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -312,12 +312,12 @@ TextureImporter:
       name: enemy-torso_8
       rect:
         serializedVersion: 2
-        x: 133
-        y: 9
-        width: 11
-        height: 13
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 128
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -333,12 +333,12 @@ TextureImporter:
       name: enemy-torso_9
       rect:
         serializedVersion: 2
-        x: 149
-        y: 9
-        width: 11
-        height: 15
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 144
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -354,12 +354,12 @@ TextureImporter:
       name: enemy-torso_10
       rect:
         serializedVersion: 2
-        x: 165
-        y: 9
-        width: 5
-        height: 15
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 160
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -375,12 +375,12 @@ TextureImporter:
       name: enemy-torso_11
       rect:
         serializedVersion: 2
-        x: 181
-        y: 9
-        width: 7
-        height: 13
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 176
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -396,12 +396,12 @@ TextureImporter:
       name: enemy-torso_12
       rect:
         serializedVersion: 2
-        x: 197
-        y: 9
-        width: 9
-        height: 14
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 192
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -417,12 +417,12 @@ TextureImporter:
       name: enemy-torso_13
       rect:
         serializedVersion: 2
-        x: 213
-        y: 9
-        width: 8
-        height: 13
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 208
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -438,12 +438,12 @@ TextureImporter:
       name: enemy-torso_14
       rect:
         serializedVersion: 2
-        x: 229
-        y: 9
-        width: 8
-        height: 13
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 224
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -459,12 +459,12 @@ TextureImporter:
       name: enemy-torso_15
       rect:
         serializedVersion: 2
-        x: 245
-        y: 8
-        width: 7
-        height: 14
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 240
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -480,12 +480,12 @@ TextureImporter:
       name: enemy-torso_16
       rect:
         serializedVersion: 2
-        x: 261
-        y: 8
-        width: 5
-        height: 14
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 256
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -501,12 +501,12 @@ TextureImporter:
       name: enemy-torso_17
       rect:
         serializedVersion: 2
-        x: 277
-        y: 6
-        width: 5
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 272
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -522,12 +522,12 @@ TextureImporter:
       name: enemy-torso_18
       rect:
         serializedVersion: 2
-        x: 293
-        y: 6
-        width: 8
-        height: 16
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 288
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -543,12 +543,12 @@ TextureImporter:
       name: enemy-torso_19
       rect:
         serializedVersion: 2
-        x: 309
-        y: 9
-        width: 10
-        height: 13
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 304
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -564,12 +564,12 @@ TextureImporter:
       name: enemy-torso_20
       rect:
         serializedVersion: 2
-        x: 325
-        y: 9
-        width: 11
-        height: 13
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 320
+        y: 0
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -585,12 +585,12 @@ TextureImporter:
       name: enemy-torso_21
       rect:
         serializedVersion: 2
-        x: 340
+        x: 336
         y: 0
-        width: 6
-        height: 21
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -606,12 +606,12 @@ TextureImporter:
       name: enemy-torso_22
       rect:
         serializedVersion: 2
-        x: 356
+        x: 352
         y: 0
-        width: 6
-        height: 19
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -627,12 +627,12 @@ TextureImporter:
       name: enemy-torso_23
       rect:
         serializedVersion: 2
-        x: 372
+        x: 368
         y: 0
-        width: 6
-        height: 21
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -648,12 +648,12 @@ TextureImporter:
       name: enemy-torso_24
       rect:
         serializedVersion: 2
-        x: 388
+        x: 384
         y: 0
-        width: 9
-        height: 18
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -669,12 +669,12 @@ TextureImporter:
       name: enemy-torso_25
       rect:
         serializedVersion: 2
-        x: 402
+        x: 400
         y: 0
-        width: 11
-        height: 17
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -693,9 +693,9 @@ TextureImporter:
         x: 416
         y: 0
         width: 16
-        height: 9
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -714,9 +714,9 @@ TextureImporter:
         x: 432
         y: 0
         width: 16
-        height: 5
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -735,9 +735,9 @@ TextureImporter:
         x: 448
         y: 0
         width: 16
-        height: 5
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

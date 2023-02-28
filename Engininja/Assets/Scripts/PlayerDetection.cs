@@ -52,7 +52,7 @@ public class PlayerDetection : MonoBehaviour
     public Sprite attackingSprite;
     public SpriteRenderer alertStateSprite;
     public EnemyGenerator generator;
-
+    public Animator parentAnimator;
 
     public int alertCounter = 0;
     private float lastAlertTime = 0;
@@ -65,7 +65,7 @@ public class PlayerDetection : MonoBehaviour
     private const float REACTION_TIME = .5f;
     private const float TIME_BETWEEN_SHOTS = 3f;
     private const int ALERT_INCREASE_SPEED = 8;
-    private const float LOS_VERTICAL_OFFSET = .8f;
+    private const float LOS_VERTICAL_OFFSET = .5f;
     private float timeSeen = 0f;
     public float timeSinceLastSeenPlayer = 0f;
     public Vector3 lastSeenPlayerLocation;
@@ -87,6 +87,7 @@ public class PlayerDetection : MonoBehaviour
     {
         if (timeSinceLastShot - Time.time < TIME_BETWEEN_SHOTS * -1)
         {
+            parentAnimator.SetTrigger("gunShot");
             generator.OnGunShot(transform.position);
             timeSinceLastShot = Time.time;
             // Change volume based on distance
@@ -230,7 +231,7 @@ public class PlayerDetection : MonoBehaviour
             if (raycastHit.collider && raycastHit.collider.gameObject.name == "Player")
             {
                 hasVisionOfPlayer = true;
-                //Debug.DrawRay(origin, angle, Color.red);
+                Debug.DrawRay(origin, angle, Color.red);
                 Vector3 targetPos = raycastHit.collider.gameObject.transform.position;
                 Quaternion target = Quaternion.LookRotation(
                     new Vector3(targetPos.x, targetPos.y + .5f, 0) - transform.position, transform.TransformDirection(Vector3.up)
@@ -241,7 +242,7 @@ public class PlayerDetection : MonoBehaviour
             }
             else
             {
-                //Debug.DrawRay(origin, angle);
+                Debug.DrawRay(origin, angle);
             }
         }
         if (hasVisionOfPlayer == false)

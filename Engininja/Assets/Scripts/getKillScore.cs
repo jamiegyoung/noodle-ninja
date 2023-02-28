@@ -16,6 +16,6 @@ public class getKillScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.SetText("YOU SLAUGHTERED " + scoreController.killCounter + " ENEMIES");
+        text.SetText("YOU SLAUGHTERED " + scoreController.killCounter + " " + (scoreController.killCounter == 1 ? "ENEMY" : "ENEMIES"));
     }
 }
