@@ -268,15 +268,15 @@ public class PlayerDetection : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        GUIStyle style = new();
-        style.normal.textColor = Color.green;
-        style.fontSize = 18;
-        style.alignment = TextAnchor.MiddleCenter;
-        style.border = new RectOffset(10, 10, 10, 10);
-        Handles.Label(new Vector2(transform.position.x, transform.position.y + .5f), alertCounter.ToString() + " : " + alertState.ToString(), style);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    GUIStyle style = new();
+    //    style.normal.textColor = Color.green;
+    //    style.fontSize = 18;
+    //    style.alignment = TextAnchor.MiddleCenter;
+    //    style.border = new RectOffset(10, 10, 10, 10);
+    //    Handles.Label(new Vector2(transform.position.x, transform.position.y + .5f), alertCounter.ToString() + " : " + alertState.ToString(), style);
+    //}
 
     void FixedUpdate()
     {

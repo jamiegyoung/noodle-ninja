@@ -21,7 +21,7 @@ public class EnemyMovement : MonoBehaviour
     public GameObject roomsContainer;
     private List<Room> rooms;
     public LayerMask interactableMask;
-    private const float HEURISTICS_WEIGHT = .5f;
+    private const float HEURISTICS_WEIGHT = .3f;
     private bool atLocationFlipFlag = false;
     private Animator anim;
 

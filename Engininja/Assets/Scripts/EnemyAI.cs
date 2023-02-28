@@ -1,10 +1,5 @@
 using UnityEngine;
 using static PlayerDetection;
-using static ConvertToRad;
-using UnityEditor.Experimental.GraphView;
-using static ScoreController;
-using static UnityEngine.Rendering.DebugUI;
-using UnityEngine.AI;
 using System.Collections.Generic;
 
 public class EnemyAI : MonoBehaviour, Interactable

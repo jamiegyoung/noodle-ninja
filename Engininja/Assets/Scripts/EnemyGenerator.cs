@@ -107,6 +107,10 @@ public class EnemyGenerator : MonoBehaviour
         {
             GameObject enemyGameObject = enemyGameObjects[i];
             PlayerDetection playerDetection = enemyGameObject.GetComponentInChildren<PlayerDetection>();
+            if (playerDetection == null)
+            {
+                continue;
+            }
             if (playerDetection.hasVisionOfPlayer && playerDetection.alertState == PlayerDetection.AlertState.Attacking)
             {
                 return true;
