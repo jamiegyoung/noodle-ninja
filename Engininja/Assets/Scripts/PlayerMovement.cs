@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private bool leftFoot = false;
     public AudioSource leftFootAudio;
     public AudioSource rightFootAudio;
+    private PlayerHealth playerHealth;
 
     private enum AnimationState
     {
@@ -40,16 +41,20 @@ public class PlayerMovement : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         coll = GetComponent<BoxCollider2D>();
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     void Update()
     {
+        if (playerHealth.isDead) return;
         inputVector = inputHandler.GetActionValue<Vector2>(InputHandlerActions.Move);
         UpdateAnimationState();
     }
 
     private void FixedUpdate()
     {
+        if (playerHealth.isDead) return;
+
         if (inputVector.y > .1f && IsGrounded())
         {
             lastJumpTime = Time.time;

@@ -608,10 +608,10 @@ TextureImporter:
         serializedVersion: 2
         x: 352
         y: 0
-        width: 32
+        width: 16
         height: 6
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -686,6 +686,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: player_26
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 0
+        width: 16
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e8cba16fb735fb48a8a8c9d80a5d9e3
+      internalID: 1911224542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -705,6 +726,7 @@ TextureImporter:
       player_12: -592337725
       player_19: 1783829025
       player_21: -1371008699
+      player_26: 1911224542
       player_4: 589696617
       player_5: -984187324
       player_25: -1584560204

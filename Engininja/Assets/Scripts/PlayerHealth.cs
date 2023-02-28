@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     public int health = 3;
     public float transitionSpeed;
     private float timeSinceLastDamage = 0f;
+    private Animator anim;
 
     private void FixedUpdate()
     {
@@ -59,12 +60,15 @@ public class PlayerHealth : MonoBehaviour
         globalVolume.profile.TryGet<Vignette>(out vignette);
         globalVolume.profile.TryGet<FilmGrain>(out filmGrain);
         globalVolume.profile.TryGet<LensDistortion>(out lensDistortion);
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
         if (health <= 0 && !isDead)
         {
+            gameObject.layer = LayerMask.NameToLayer("Dead");
+            anim.SetBool("isDead", true);
             deathCanvas.SetActive(true);
         }
 

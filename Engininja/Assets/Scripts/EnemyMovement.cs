@@ -23,8 +23,7 @@ public class EnemyMovement : MonoBehaviour
     public LayerMask interactableMask;
     private const float HEURISTICS_WEIGHT = .5f;
     private bool atLocationFlipFlag = false;
-    private float giveUpTimer = 0f;
-
+    private Animator anim;
 
     private void Start()
     {
@@ -33,6 +32,7 @@ public class EnemyMovement : MonoBehaviour
         enemyAI = GetComponent<EnemyAI>();
         pd = GetComponentInChildren<PlayerDetection>();
         rooms = roomsContainer.GetComponentsInChildren<Room>().ToList();
+        anim = GetComponent<Animator>();
     }
 
     void TraverseOwnRoom(float speed, Vector2 target)
@@ -41,6 +41,7 @@ public class EnemyMovement : MonoBehaviour
         //Debug.Log("setting flip due to movement to " + isFlipped);
         enemyAI.FlipX = isFlipped;
         float directionMultiplier = isFlipped ? 1 : -1;
+        anim.SetBool("enemyWalking", true);
         float smoothXVel = Mathf.SmoothDamp(rb.velocity.x, speed * directionMultiplier * -1, ref currentXVelocity, timeToMaxVelocity);
         rb.velocity = new Vector2(smoothXVel, rb.velocity.y);
     }
@@ -184,6 +185,7 @@ public class EnemyMovement : MonoBehaviour
         //Debug.Log(tmpLocation);
         if (coll.bounds.Contains(targetLocation))
         {
+            anim.SetBool("enemyWalking", false);
             if (atLocationFlipFlag == false && this.patrolLocation.flipAtLocation)
             {
                 atLocationFlipFlag = true;
@@ -198,7 +200,7 @@ public class EnemyMovement : MonoBehaviour
         // Wait a second to move after last seeing the player
         if (pd.timeSinceLastSeenPlayer - Time.time > timeUntilContinueAfterSeen * -.5f)
         {
-            giveUpTimer = Time.time;
+            anim.SetBool("enemyWalking", false);
             return;
         }
 
