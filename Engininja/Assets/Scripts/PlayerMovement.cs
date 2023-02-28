@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource leftFootAudio;
     public AudioSource rightFootAudio;
     private PlayerHealth playerHealth;
+    public AudioSource jumpAudio;
+    public AudioSource landAudio;
 
     private enum AnimationState
     {
@@ -58,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         if (inputVector.y > .1f && IsGrounded())
         {
             lastJumpTime = Time.time;
+            jumpAudio.Play();
             rb.velocity = new Vector2(rb.velocity.x, playerJumpHeight);
         }
         else if (inputVector.y <= 0f && rb.velocity.y > 0f)
@@ -112,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
             state = AnimationState.falling;
             if (IsGrounded())
             {
-
+                landAudio.Play();
             }
         }
         else if (rb.velocity.y > .1f)
