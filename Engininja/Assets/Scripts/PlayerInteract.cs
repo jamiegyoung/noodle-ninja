@@ -29,6 +29,7 @@ public class PlayerInteract : MonoBehaviour
     void Update()
     {
         RaycastHit2D hit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, GetDirectionVector(), 1f, interactableMask + enemyMask + blockingMask);
+        Debug.Log(hit);
         if (hit.collider == null)
         {
             interactionInformer.Hide();
@@ -36,7 +37,7 @@ public class PlayerInteract : MonoBehaviour
         }
 
         Vector3 hitPos = hit.collider.transform.position;
-        // Hit blocking, not interactable
+        // Hit blocking, not interactableZ
         Interactable interactable = hit.collider.GetComponent<Interactable>();
         if (interactable == null)
         {
@@ -58,7 +59,7 @@ public class PlayerInteract : MonoBehaviour
             // Only give forward momentum if enemy
             if (hit.collider.gameObject.layer == 10)
             {
-                rb.velocity = new Vector2(rb.velocity.x + (hitPos.x - transform.position.x) * 50, rb.velocity.y);
+                rb.velocity = new Vector2(rb.velocity.x + (hitPos.x - transform.position.x) * 25f, rb.velocity.y);
             }
             if (interactable.IsInteractable)
             {

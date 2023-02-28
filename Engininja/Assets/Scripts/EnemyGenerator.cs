@@ -22,6 +22,7 @@ public struct Enemy
 
 public class EnemyGenerator : MonoBehaviour
 {
+    public float enemyLightBrightness = 1.5f;
     public Enemy[] enemies;
     public GameObject enemyTemplate;
     public LayerMask enemyMask;
@@ -66,7 +67,20 @@ public class EnemyGenerator : MonoBehaviour
         foreach (GameObject enemyGameObject in enemyGameObjects)
         {
             PlayerDetection playerDetection = enemyGameObject.GetComponentInChildren<PlayerDetection>();
-            playerDetection.lastSeenPlayerLocation = new Vector2(Random.Range(0, 3) + location.x, location.y);
+            Vector2 target = new Vector2(location.x, location.y);
+            Room[] rooms = roomsContainer.GetComponentsInChildren<Room>();
+            bool targetFlag = false;
+            foreach (Room room in rooms)
+            {
+                if (room.coll.bounds.Contains(target))
+                {
+                    targetFlag = true;
+                }
+            }
+            if (targetFlag)
+            {
+                playerDetection.lastSeenPlayerLocation = target;
+            }
             playerDetection.alertCounter = PlayerDetection.MAX_ALERT;
             playerDetection.alertState = PlayerDetection.AlertState.Aware;
         }
@@ -77,7 +91,7 @@ public class EnemyGenerator : MonoBehaviour
         yield return new WaitForSeconds(1f);
         foreach (Light2D light in enemyLights)
         {
-            light.intensity = light.intensity == 0f ? 1.5f : 0f;
+            light.intensity = light.intensity == 0f ? enemyLightBrightness : 0f;
             yield return new WaitForSeconds(0.02f);
         }
     }

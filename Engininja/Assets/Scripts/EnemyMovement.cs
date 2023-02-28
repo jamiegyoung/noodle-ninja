@@ -23,6 +23,7 @@ public class EnemyMovement : MonoBehaviour
     public LayerMask interactableMask;
     private const float HEURISTICS_WEIGHT = .5f;
     private bool atLocationFlipFlag = false;
+    private float giveUpTimer = 0f;
 
 
     private void Start()
@@ -197,6 +198,7 @@ public class EnemyMovement : MonoBehaviour
         // Wait a second to move after last seeing the player
         if (pd.timeSinceLastSeenPlayer - Time.time > timeUntilContinueAfterSeen * -.5f)
         {
+            giveUpTimer = Time.time;
             return;
         }
 
@@ -234,10 +236,7 @@ public class EnemyMovement : MonoBehaviour
         if (hit.collider && hit.collider.bounds.Contains(nodes[0].fromTransitionLocation))
         {
             Interactable interactable = hit.collider.GetComponent<Interactable>();
-            //if (interactable.IsInteractable)
-            //{
             interactable.Interact(gameObject);
-            //}
         }
         atTargetLocation = false;
     }

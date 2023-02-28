@@ -62,7 +62,7 @@ public class PlayerDetection : MonoBehaviour
     private const float MAX_GUN_AUDIO_DISTANCE = 30f;
     public const int MAX_ALERT = 250;
     private const int MIN_ALERT = 0;
-    private const float REACTION_TIME = 1f;
+    private const float REACTION_TIME = .5f;
     private const float TIME_BETWEEN_SHOTS = 3f;
     private const int ALERT_INCREASE_SPEED = 8;
     private const float LOS_VERTICAL_OFFSET = .8f;

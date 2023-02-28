@@ -14,8 +14,6 @@ public class EnemyAttack : MonoBehaviour
         coll = GetComponent<Collider2D>();
     }
 
-
-
     private void Update()
     {
         Vector2 offset = new Vector3(0, 0, transform.rotation.eulerAngles.z);
