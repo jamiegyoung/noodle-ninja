@@ -2,6 +2,7 @@ using System;
 using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using static ConvertToRad;
 
 // modified version of https://stackoverflow.com/a/643438
@@ -50,14 +51,16 @@ public class PlayerDetection : MonoBehaviour
     public Sprite awareSprite;
     public Sprite attackingSprite;
     public SpriteRenderer alertStateSprite;
+    public EnemyGenerator generator;
 
-    private int alertCounter = 0;
+
+    public int alertCounter = 0;
     private float lastAlertTime = 0;
     private float timeSinceLastShot = 0f;
     private AudioSource gunShotSource;
     private const float MIN_GUN_AUDIO_DISTANCE = 1f;
     private const float MAX_GUN_AUDIO_DISTANCE = 30f;
-    private const int MAX_ALERT = 250;
+    public const int MAX_ALERT = 250;
     private const int MIN_ALERT = 0;
     private const float REACTION_TIME = 1f;
     private const float TIME_BETWEEN_SHOTS = 3f;
@@ -84,6 +87,7 @@ public class PlayerDetection : MonoBehaviour
     {
         if (timeSinceLastShot - Time.time < TIME_BETWEEN_SHOTS * -1)
         {
+            generator.OnGunShot(transform.position);
             timeSinceLastShot = Time.time;
             // Change volume based on distance
             float dist = Vector2.Distance(transform.position, playerTransform.position);
@@ -193,7 +197,11 @@ public class PlayerDetection : MonoBehaviour
     {
         UpdateAlertCounter();
         UpdateAlertVisuals();
-        if (GetComponentInParent<EnemyAI>().IsDead == true) { return; }
+        if (GetComponentInParent<EnemyAI>().IsDead == true)
+        {
+            alertState = AlertState.Idle;
+            return;
+        }
         HandleLineOfSight();
     }
 
@@ -215,7 +223,7 @@ public class PlayerDetection : MonoBehaviour
                 lineOfSightDistance * Mathf.Sin(ConvertToRad.Convert(i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation) * viewAngleOffset)),
                 lineOfSightDistance * Mathf.Cos(ConvertToRad.Convert(i + Quaternion.Angle(Quaternion.Euler(0, 0, 90), transform.rotation) * viewAngleOffset))
                 );
-            Vector3 origin = new Vector3(
+            Vector3 origin = new(
                     coll.bounds.center.x,
                     coll.bounds.center.y + LOS_VERTICAL_OFFSET,
                     coll.bounds.center.z

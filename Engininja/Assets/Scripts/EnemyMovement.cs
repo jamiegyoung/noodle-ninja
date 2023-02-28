@@ -195,7 +195,7 @@ public class EnemyMovement : MonoBehaviour
         atLocationFlipFlag = false;
 
         // Wait a second to move after last seeing the player
-        if (pd.timeSinceLastSeenPlayer - Time.time > timeUntilContinueAfterSeen * -1)
+        if (pd.timeSinceLastSeenPlayer - Time.time > timeUntilContinueAfterSeen * -.5f)
         {
             return;
         }

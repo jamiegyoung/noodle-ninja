@@ -10,7 +10,7 @@ using System.Collections.Generic;
 public class EnemyAI : MonoBehaviour, Interactable
 {
     //public Transform playerTransform;
-    private float lastFlipped;
+    private float behaviourTimer;
     private bool _isDead = false;
     private BoxCollider2D coll;
     private bool scoreDetectionFlag = false;
@@ -43,10 +43,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         }
         set
         {
-            lastFlipped = Time.time;
-            //rotationValue = (rotationValue + 180) % 360;
-            //Debug.Log("Setting Flip to " + value);
-            //transform.rotation = Quaternion.Euler(0, rotationValue, 0);
+            behaviourTimer = Time.time;
             transform.localScale = new Vector3(value ? -1 : 1, transform.localScale.y, transform.localScale.z);
             _flipX = value;
         }
@@ -60,7 +57,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         enemyMovement = GetComponent<EnemyMovement>();
         if (idleFlip)
         {
-            lastFlipped = Time.time;
+            behaviourTimer = Time.time;
         }
         coll = GetComponent<BoxCollider2D>();
     }
@@ -71,31 +68,62 @@ public class EnemyAI : MonoBehaviour, Interactable
 
         // Conditional behaviour dependent on the state
         // Score detection flag prevents duplicate subtracation of scores
-        switch (playerDetection.alertState)
+
+        if (playerDetection.alertState == AlertState.Idle)
         {
-            case AlertState.Idle:
-                scoreDetectionFlag = false;
-                IdleBehaviour();
-                break;
-            case AlertState.Aware:
-                scoreDetectionFlag = false;
-                //idleBehaviour();
-                break;
-            case AlertState.Attacking:
-                if (scoreDetectionFlag == false)
-                {
-                    scoreDetectionFlag = true;
-                    scoreController.AddScore(ScoreConditions.Detection);
-                }
-                //idleBehaviour();
-                break;
+            scoreDetectionFlag = false;
+            IdleBehaviour();
         }
+        else if (playerDetection.alertState == AlertState.Attacking)
+        {
+            if (scoreDetectionFlag == false)
+            {
+                scoreDetectionFlag = true;
+                scoreController.AddScore(ScoreConditions.Detection);
+            }
+        }
+
+        if (playerDetection.alertState == AlertState.Aware || playerDetection.alertState == AlertState.Attacking)
+        {
+            AggressiveBehaviour();
+        }
+
+
+    }
+
+    private void AggressiveBehaviour()
+    {
+        Vector2 lastSeenLocation = playerDetection.lastSeenPlayerLocation;
+        if (lastSeenLocation != null)
+        {
+            PatrolLocation lastLocationPatrolLocation = new();
+            float y = RoundY(lastSeenLocation);
+            lastLocationPatrolLocation.location = new Vector2(lastSeenLocation.x, y); 
+            if (behaviourTimer - Time.time < -1f && !playerDetection.hasVisionOfPlayer && enemyMovement.atTargetLocation)
+            {
+                FlipX = !FlipX;
+            }
+            enemyMovement.patrolLocation = lastLocationPatrolLocation;
+            enemyMovement.patrolLocation.flipAtLocation = false;
+        }
+    }
+
+    private static float RoundY(Vector2 lastSeenLocation)
+    {
+        if (lastSeenLocation.y < 1)
+        {
+            return -3;
+        }
+        else if (lastSeenLocation.y < 5)
+        {
+            return 1;
+        }
+        else { return -3; }
     }
 
     private void IdleBehaviour()
     {
-
-        if (lastFlipped - Time.time < -5f)
+        if (behaviourTimer - Time.time < -1f)
         {
             if (patrolLocations.Count > 0)
             {

@@ -10,7 +10,7 @@ public class HidingSpot : MonoBehaviour, Interactable
     public GameObject player;
     private bool isHiding = false;
 
-    public bool IsInteractable => !enemyGenerator.playerIsSeenAndBeingAttacked();
+    public bool IsInteractable => !enemyGenerator.PlayerIsSeenAndBeingAttacked();
     private Rigidbody2D playerRigidbody;
     private SpriteRenderer playerSpriteRenderer;
     private ShadowCaster2D playerShadowCaster2D;

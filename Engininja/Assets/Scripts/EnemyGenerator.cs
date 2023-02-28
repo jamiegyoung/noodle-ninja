@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Events;
 
 [System.Serializable]
 public struct PatrolLocation
@@ -27,11 +28,12 @@ public class EnemyGenerator : MonoBehaviour
     public ScoreController scoreController;
     public Transform playerTransform;
     public PlayerHealth playerHealth;
-    private List<GameObject> enemyGameObjects = new();
+    private readonly List<GameObject> enemyGameObjects = new();
     public GameObject roomsContainer;
     public LayerMask interactableMask;
     public Switch lightSwitch;
     private Light2D[] enemyLights;
+
 
     void Start()
     {
@@ -49,6 +51,7 @@ public class EnemyGenerator : MonoBehaviour
             PlayerDetection playerDetection = duplicate.GetComponentInChildren<PlayerDetection>();
             playerDetection.playerHealth = playerHealth;
             playerDetection.playerTransform = playerTransform;
+            playerDetection.generator = this;
             EnemyMovement enemyMovement = duplicate.GetComponentInChildren<EnemyMovement>();
             enemyMovement.patrolLocation = enemy.patrolLocations[0];
             enemyMovement.roomsContainer = roomsContainer;
@@ -56,6 +59,17 @@ public class EnemyGenerator : MonoBehaviour
             enemyGameObjects.Add(Instantiate(duplicate, gameObject.transform));
         }
         enemyLights = gameObject.GetComponentsInChildren<Light2D>();
+    }
+
+    public void OnGunShot(Vector2 location)
+    {
+        foreach (GameObject enemyGameObject in enemyGameObjects)
+        {
+            PlayerDetection playerDetection = enemyGameObject.GetComponentInChildren<PlayerDetection>();
+            playerDetection.lastSeenPlayerLocation = new Vector2(Random.Range(0, 3) + location.x, location.y);
+            playerDetection.alertCounter = PlayerDetection.MAX_ALERT;
+            playerDetection.alertState = PlayerDetection.AlertState.Aware;
+        }
     }
 
     public IEnumerator SwitchEnemyLights()
@@ -73,7 +87,7 @@ public class EnemyGenerator : MonoBehaviour
     /// Mainly used for disabling hiding spots
     /// </summary>
     /// <returns>Whether the player is currently in vision and being attacked by</returns>
-    public bool playerIsSeenAndBeingAttacked()
+    public bool PlayerIsSeenAndBeingAttacked()
     {
         for (int i = 0; i < enemyGameObjects.Count; i++)
         {
