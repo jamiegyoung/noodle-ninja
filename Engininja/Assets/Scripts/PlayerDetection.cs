@@ -197,11 +197,6 @@ public class PlayerDetection : MonoBehaviour
     {
         UpdateAlertCounter();
         UpdateAlertVisuals();
-        if (GetComponentInParent<EnemyAI>().IsDead == true)
-        {
-            alertState = AlertState.Idle;
-            return;
-        }
         HandleLineOfSight();
     }
 
@@ -284,7 +279,12 @@ public class PlayerDetection : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (GetComponentInParent<EnemyAI>().IsDead == true) { return; }
+        if (GetComponentInParent<EnemyAI>().isDead == true)
+        {
+            hasVisionOfPlayer = false;
+            alertState = AlertState.Idle;
+            return;
+        }
         UpdateAlert();
     }
 }

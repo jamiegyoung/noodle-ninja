@@ -821,6 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82a9e204aa4195641bd9b054635d6f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
   otherEnemiesLineOfSightDistance: 10
   enemyMask:
     serializedVersion: 2

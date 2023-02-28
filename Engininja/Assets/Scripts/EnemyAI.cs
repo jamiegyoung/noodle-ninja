@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour, Interactable
 {
     //public Transform playerTransform;
     private float behaviourTimer;
-    private bool _isDead = false;
+    public bool isDead = false;
     private BoxCollider2D coll;
     private bool scoreDetectionFlag = false;
     private EnemyMovement enemyMovement;
@@ -26,13 +26,6 @@ public class EnemyAI : MonoBehaviour, Interactable
     public List<PatrolLocation> patrolLocations;
     private bool _flipX;
     private int patrolLocationCounter = 0;
-    public bool IsDead
-    {
-        get
-        {
-            return _isDead;
-        }
-    }
 
     public bool FlipX
     {
@@ -64,7 +57,7 @@ public class EnemyAI : MonoBehaviour, Interactable
 
     private void HandleBehaviour()
     {
-        if (IsDead || !enemyMovement.atTargetLocation) { return; }
+        if (isDead || !enemyMovement.atTargetLocation) { return; }
 
         // Conditional behaviour dependent on the state
         // Score detection flag prevents duplicate subtracation of scores
@@ -98,7 +91,7 @@ public class EnemyAI : MonoBehaviour, Interactable
         {
             PatrolLocation lastLocationPatrolLocation = new();
             float y = RoundY(lastSeenLocation);
-            lastLocationPatrolLocation.location = new Vector2(lastSeenLocation.x, y); 
+            lastLocationPatrolLocation.location = new Vector2(lastSeenLocation.x, y);
             if (behaviourTimer - Time.time < -1f && !playerDetection.hasVisionOfPlayer && enemyMovement.atTargetLocation)
             {
                 FlipX = !FlipX;
@@ -177,11 +170,11 @@ public class EnemyAI : MonoBehaviour, Interactable
     {
         deathAudio.pitch = Random.Range(0.85f, 1.15f);
         deathAudio.Play();
-        if (_isDead == true)
+        if (isDead == true)
         {
             return;
         }
-        _isDead = true;
+        isDead = true;
         scoreController.AddScore(ScoreConditions.Kill);
         gameObject.layer = 9;
         transform.rotation = Quaternion.Euler(0, 0, 90);
