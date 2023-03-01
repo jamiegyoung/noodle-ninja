@@ -79,7 +79,7 @@ public class EnemyGenerator : MonoBehaviour
             }
             if (targetFlag && playerDetection != null)
             {
-                playerDetection.lastSeenPlayerLocation = target;
+                playerDetection.lastSeenPlayerLocation = new Vector3(target.x - Random.Range(0, 3f), target.y);
                 playerDetection.alertCounter = PlayerDetection.MAX_ALERT;
                 playerDetection.alertState = PlayerDetection.AlertState.Aware;
             }
