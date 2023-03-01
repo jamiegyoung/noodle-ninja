@@ -1,0 +1,151 @@
+# Assets
+
+- Scripts:
+  - AutoLoadGame.cs
+  - CameraController.cs
+  - cheatCollider.cs
+  - cheatText.cs
+  - ConvertToRad.cs
+  - DeathCanvas.cs
+  - Door.cs
+  - Doors.cs
+  - EnemyAI.cs
+  - EnemyGenerator.cs
+  - EnemyMovement.cs
+  - finalScore.cs
+  - FlashLight.cs
+  - getAttackedScore.cs
+  - getKillScore.cs
+  - Goal.cs
+  - HealthDisplay.cs
+  - HidingSpot.cs
+  - InputHandler.cs
+  - Interactable.cs
+  - InteractionInformer.cs
+  - MainMenu.cs
+  - PauseCanvas.cs
+  - PauseController.cs
+  - PlayerControls.cs
+  - PlayerDetection.cs
+  - PlayerHealth.cs
+  - PlayerInteract.cs
+  - PlayerMovement.cs
+  - Room.cs
+  - SceneLoader.cs
+  - ScoreController.cs
+  - SkipCutscene.cs
+  - Stairs.cs
+  - Switch.cs
+- Sprites:
+  - Tiles
+  - backgroundtileable.png
+  - backgroundtiles.png
+  - barbedwire.png
+  - BG.png
+  - box.png
+  - ceilinglight.png
+  - door.png
+  - end.png
+  - endramen.png
+  - enemy_legs.png
+  - enemy-torso.png
+  - exclamationmark.png
+  - exteriorbench.png
+  - fan.png
+  - floortiles.png
+  - heart.png
+  - house.png
+  - indoorbench.png
+  - lamppost.png
+  - lock.png
+  - locker.png
+  - mopbucket.png
+  - noticeboard.png
+  - plant.png
+  - player.png
+  - playerramentcorrect.png
+  - questionmark.png
+  - rightangle.png
+  - roof.png
+  - stairs1.png
+  - stairs2.png
+  - switch.png
+  - tilevariants.png
+  - walls.png
+  - window.png
+  - windowvariants.png
+- Audio:
+  - alert.mp3
+  - Aurea Carmina.mp3
+  - aware.mp3
+  - bulletmiss.mp3
+  - doorclose.mp3
+  - dooropen.mp3
+  - footstepleft.mp3
+  - footstepright.mp3
+  - gunshot.mp3
+  - Healing.mp3
+  - hiding.mp3
+  - jump.mp3
+  - lamppostflicker.mp3
+  - landingfromjump.mp3
+  - Leaving Home Ending.mp3
+  - Leaving Home.mp3
+  - playerslice.mp3
+  - switch.mp3
+  - Tranquility Base.mp3
+- Materials:
+  - Frictionless.physicsMaterial2D
+- Prefabs:
+  - BG Light.prefab
+  - CeilingLight.prefab
+  - DeathCanvas.prefab
+  - Door.prefab
+  - Enemy.prefab
+  - Global Light 2D.prefab
+  - Global Volume.prefab
+  - HidingSpot.prefab
+  - Lamppost.prefab
+  - Loader.prefab
+  - Main Camera.prefab
+  - PauseCanvas.prefab
+  - Player.prefab
+  - Rooms.prefab
+  - Stairs.prefab
+  - UI.prefab
+  - WindowLeft.prefab
+- Animations:
+  - Crossfade_End.anim
+  - Crossfade_Start.anim
+  - Door_Closed.anim
+  - Door_Open.anim
+  - Enemy_Aiming.anim
+  - Enemy_Death.anim
+  - Enemy_Idle.anim
+  - Enemy_Shot.anim
+  - Enemy_walking.anim
+  - Fan_Spin.anim
+  - FaultLamppost.anim
+  - FlashingLight.anim
+  - GoalTimeline.playable
+  - Intro.playable
+  - IntroCutsceneTimeline.playable
+  - MainMenuTimeline.playable
+  - Player_Death.anim
+  - Player_Falling.anim
+  - Player_Idle.anim
+  - Player_Jump.anim
+  - Player_Running.anim
+  - Second GoalTimeLine.playable
+  - Switch.controller
+  - Switch_Off.anim
+  - Switch_On.anim
+  - Win.anim
+  - Win_Eating.anim
+  - Win_walking.anim
+- Fonts:
+  - ka1.ttf
+- Scenes:
+  - Game.unity
+  - Intro.unity
+  - Menu.unity
