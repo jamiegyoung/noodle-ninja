@@ -2133,7 +2133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2138634379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2146,7 +2146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff47d94acce53d479c167f604b5d8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneLoader: {fileID: 0}
+  sceneLoader: {fileID: 430087708}
 --- !u!4 &2138634380
 Transform:
   m_ObjectHideFlags: 0
