@@ -29,7 +29,6 @@ public class PlayerInteract : MonoBehaviour
     void Update()
     {
         RaycastHit2D hit = Physics2D.BoxCast(coll.bounds.center, coll.bounds.size, 0f, GetDirectionVector(), 1f, interactableMask + enemyMask + blockingMask);
-        Debug.Log(hit);
         if (hit.collider == null)
         {
             interactionInformer.Hide();
